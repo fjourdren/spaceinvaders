@@ -2,7 +2,7 @@ package fr.space.controllers;
 
 import fr.space.models.ModelSpace;
 
-public class Controller {
+public abstract class Controller {
     private ModelSpace gameModel;
 
     public Controller(ModelSpace gameModel) {
