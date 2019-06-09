@@ -10,7 +10,7 @@ import fr.space.views.ConfigInterface;
 public class Run {
 
     public static void main (String[] args){
-        Game game = new Game();
+        Game game = new Game(200);
 
         game.run();
 
@@ -20,8 +20,8 @@ public class Run {
 
         ControllerSpace controler = new ControllerSpace(conv);
 
-        ViewSpace gameInterface = new GameInterface(controler, "SpaceInvaders - Hunt the Kalash");
-        ViewSpace configInterface = new ConfigInterface(controler, "Config - SpaceInvaders");
+        //ViewSpace gameInterface = new GameInterface(controler, "SpaceInvaders - Hunt the Kalash");
+        //ViewSpace configInterface = new ConfigInterface(controler, "Config - SpaceInvaders");
 
     }
 
