@@ -2,11 +2,10 @@ package fr.space.models;
 
 import fr.space.classes.Game;
 
-public class ModelSpace {
-
-    private Game game;
+public class ModelSpace extends Model {
 
     public ModelSpace(Game game) {
-        this.game = game;
+        super(game);
     }
+
 }
