@@ -1,5 +1,7 @@
 package fr.space.classes;
 
+import java.awt.*;
+
 public class Bullet extends Entity {
     private static float speed = 1.0f;
 
@@ -8,7 +10,7 @@ public class Bullet extends Entity {
     }
 
 
-    public void render() {
+    public void render(Graphics g) {
 
     }
 
