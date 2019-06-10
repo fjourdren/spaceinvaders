@@ -11,7 +11,7 @@ public class Alien extends Entity {
     }
 
 
-    public void render() {
+    public void render(Graphics g) {
 
     }
 

@@ -9,10 +9,12 @@ import fr.space.views.ConfigInterface;
 
 public class Run {
 
-    public static void main (String[] args){
-        Game game = new Game(200);
+    public static void main (String[] args) {
 
-        game.run();
+        final int width = 500;
+        final int height = 600;
+
+        Game game = new Game(height);
 
 
         // create interface
@@ -20,9 +22,12 @@ public class Run {
 
         ControllerSpace controler = new ControllerSpace(conv);
 
-        //ViewSpace gameInterface = new GameInterface(controler, "SpaceInvaders - Hunt the Kalash");
+        GameInterface gameInterface = new GameInterface(controler, "SpaceInvaders - Hunt the Kalash", width, height);
         //ViewSpace configInterface = new ConfigInterface(controler, "Config - SpaceInvaders");
 
+        // game loop start
+        Thread gameThread = new Thread(game);
+        gameThread.start();
     }
 
 }

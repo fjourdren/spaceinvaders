@@ -1,10 +1,11 @@
 package fr.space.classes;
 
-import javax.swing.*;
+import fr.space.views.BoardPanel;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game {
+public class Game implements Runnable {
     private List<Entity> entities = new ArrayList<Entity>();
 
     private boolean gameIsLoose = false;
@@ -13,7 +14,15 @@ public class Game {
 
     private boolean running = false;
 
+    private BoardPanel boardPanel;
+
     public Game(int ySize) {
+        this.ySize = ySize;
+        this.entities.add(new Spaceship(new Position(24, 24), 1, "/home/flavien/Dropbox/projet_space_invaders/projet_space_invaders/ship.gif"));
+    }
+
+    public Game(BoardPanel boardPanel, int ySize) {
+        this.boardPanel = boardPanel;
         this.ySize = ySize;
     }
 
@@ -31,9 +40,7 @@ public class Game {
 
 
     public void render() {
-        for (Entity e: this.entities) {
-            e.render();
-        }
+        this.boardPanel.repaint();
     }
 
 
@@ -120,5 +127,46 @@ public class Game {
                 timer += 1000;
             }
         }
+    }
+
+
+    public List<Entity> getEntities() {
+        return entities;
+    }
+
+    public void setEntities(List<Entity> entities) {
+        this.entities = entities;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public BoardPanel getBoardPanel() {
+        return boardPanel;
+    }
+
+    public void setBoardPanel(BoardPanel boardPanel) {
+        this.boardPanel = boardPanel;
+    }
+
+    public boolean isGameIsLoose() {
+        return gameIsLoose;
+    }
+
+    public void setGameIsLoose(boolean gameIsLoose) {
+        this.gameIsLoose = gameIsLoose;
+    }
+
+    public int getySize() {
+        return ySize;
+    }
+
+    public void setySize(int ySize) {
+        this.ySize = ySize;
     }
 }
