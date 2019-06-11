@@ -3,7 +3,7 @@ package fr.space.views;
 import fr.space.classes.Entity;
 import fr.space.controllers.ControllerSpace;
 
-import java.awt.Graphics;
+import java.awt.*;
 import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel {
@@ -17,6 +17,8 @@ public class BoardPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        setBackground(Color.BLACK);
 
         for (Entity e: this.getController().getModel().getEntities()) {
             e.render(g);
