@@ -6,17 +6,20 @@ public class Spaceship extends Entity {
     private Game game;
 
     private static float speed = 2.0f;
-    private static float shootInterval = 1.0f;
+    private static long shootInterval = 500000000; //0.5s in nanosecond
+    private static long lastShootTime;
 
     public Spaceship(Game game, Position position, int life, String spritePath) {
         super(position, life, spritePath);
         this.game = game;
+        this.lastShootTime = System.nanoTime();
     }
 
 
     public Spaceship(Game game, Position position, int life, Sprite sprite) {
         super(position, life, sprite);
         this.game = game;
+        this.lastShootTime = System.nanoTime();
     }
 
 
@@ -31,10 +34,15 @@ public class Spaceship extends Entity {
 
 
     public void shoot() {
-        Sprite spriteBullet = new Sprite("/home/flavien/Dropbox/projet_space_invaders/projet_space_invaders/shot.gif");
-        Position bulletPosition = new Position((this.getPosition().getX() + (this.getSprite().getxDimension() / 2)) - spriteBullet.getxDimension() / 2, this.getPosition().getY());
+        long now = System.nanoTime();
 
-        this.game.addBullet(new Bullet(this.game, bulletPosition, 1, spriteBullet));
+        if(now - this.lastShootTime > shootInterval) {
+            Sprite spriteBullet = new Sprite("/home/flavien/Dropbox/projet_space_invaders/projet_space_invaders/shot.gif");
+            Position bulletPosition = new Position((this.getPosition().getX() + (this.getSprite().getxDimension() / 2)) - spriteBullet.getxDimension() / 2, this.getPosition().getY());
+
+            this.lastShootTime = System.nanoTime();
+            this.game.addBullet(new Bullet(this.game, bulletPosition, 1, spriteBullet));
+        }
     }
 
 
@@ -67,11 +75,11 @@ public class Spaceship extends Entity {
         Spaceship.speed = speed;
     }
 
-    public static float getShootInterval() {
+    public static long getShootInterval() {
         return shootInterval;
     }
 
-    public static void setShootInterval(float shootInterval) {
+    public static void setShootInterval(long shootInterval) {
         Spaceship.shootInterval = shootInterval;
     }
 }
