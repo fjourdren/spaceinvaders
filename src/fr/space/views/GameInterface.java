@@ -1,9 +1,12 @@
 package fr.space.views;
 
+import fr.space.classes.Keyboard;
 import fr.space.controllers.ControllerSpace;
 import fr.space.views.BoardPanel;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Observable;
 
 public class GameInterface extends View {
@@ -32,6 +35,12 @@ public class GameInterface extends View {
         this.getContentPane().add(this.boardPanel);
 
         this.setLocationByPlatform(true);
+
+        // enregistrement du détecteur d'entrée clavier
+        Keyboard keyboard = new Keyboard(this.getController().getModel().getGame().getPlayer());
+        this.addKeyListener(keyboard);
+        this.getController().setKeyboard(keyboard);
+
         this.setVisible(true);
 
     }

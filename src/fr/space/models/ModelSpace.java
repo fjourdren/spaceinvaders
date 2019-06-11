@@ -3,6 +3,7 @@ package fr.space.models;
 import fr.space.classes.Entity;
 import fr.space.classes.Game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelSpace extends Model {
@@ -23,13 +24,14 @@ public class ModelSpace extends Model {
     }
 
 
-    public void setEntities(List<Entity> entities) {
-        this.getGame().setEntities(entities);
-    }
-
-
     public List<Entity> getEntities() {
-        return this.getGame().getEntities();
+        List<Entity> entities = new ArrayList<Entity>();
+
+        entities.addAll(this.getGame().getAliens());
+        entities.addAll(this.getGame().getBullets());
+        entities.add(this.getGame().getPlayer());
+
+        return entities;
     }
     
 }

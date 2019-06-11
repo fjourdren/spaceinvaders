@@ -66,6 +66,11 @@ public abstract class Entity {
     }
 
 
+    public void destroy() {
+
+    }
+
+
     public Position getPosition() {
         return position;
     }

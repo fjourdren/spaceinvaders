@@ -14,7 +14,7 @@ public class Run {
         final int width = 500;
         final int height = 600;
 
-        Game game = new Game(height);
+        Game game = new Game(width, height - 33); // remove 33 has OS window
 
 
         // create interface
