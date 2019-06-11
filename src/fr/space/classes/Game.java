@@ -38,73 +38,6 @@ public class Game implements Runnable {
     }
 
 
-    private void calculateIfLoose() {
-        for (Alien e: this.getAliens()) {
-            int yValueForLoose = this.ySize + e.getSprite().getyDimension();
-            if(e.getPosition().getY() >= yValueForLoose) {
-                this.gameIsLoose = true;
-            }
-        }
-    }
-
-
-    public void render() {
-        this.boardPanel.repaint();
-    }
-
-
-    public void update(double delta) {
-
-        this.getInput(delta);
-
-
-        this.getPlayer().update(delta);
-
-
-        Iterator<Bullet> iterBullets = this.getBullets().iterator();
-        while(iterBullets.hasNext()) {
-            Bullet b = iterBullets.next();
-
-            b.update(delta);
-
-            if(b.getLife() <= 0) {
-                iterBullets.remove();
-            }
-        }
-
-
-
-        Iterator<Alien> iterAliens = this.getAliens().iterator();
-        while(iterAliens.hasNext()) {
-            Alien a = iterAliens.next();
-
-            a.update(delta);
-
-            if(a.getLife() <= 0) {
-                iterBullets.remove();
-            }
-        }
-
-
-        this.calculateIfLoose();
-    }
-
-
-    public void getInput(double delta) {
-        if(this.getKeyboard().getKey(32)) // shoot (espace)
-            this.getPlayer().shoot();
-
-        if(this.getKeyboard().getKey(37)) // left
-            this.getPlayer().move(delta, -1);
-
-        if(this.getKeyboard().getKey(39)) // right
-            this.getPlayer().move(delta, 1);
-
-        if(this.getKeyboard().getKey(80)) // pause (p)
-            this.getPlayer().shoot();
-    }
-
-
     public void run() {
         this.running = true;
 
@@ -150,6 +83,73 @@ public class Game implements Runnable {
                 frames = 0;
                 ticks = 0;
                 timer += 1000;
+            }
+        }
+    }
+
+
+    public void render() {
+        this.boardPanel.repaint();
+    }
+
+
+    public void getInput(double delta) {
+        if(this.getKeyboard().getKey(32)) // shoot (espace)
+            this.getPlayer().shoot();
+
+        if(this.getKeyboard().getKey(37)) // left
+            this.getPlayer().move(delta, -1);
+
+        if(this.getKeyboard().getKey(39)) // right
+            this.getPlayer().move(delta, 1);
+
+        if(this.getKeyboard().getKey(80)) // pause (p)
+            this.getPlayer().shoot();
+    }
+
+
+    public void update(double delta) {
+
+        this.getInput(delta);
+
+
+        this.getPlayer().update(delta);
+
+
+        Iterator<Bullet> iterBullets = this.getBullets().iterator();
+        while(iterBullets.hasNext()) {
+            Bullet b = iterBullets.next();
+
+            b.update(delta);
+
+            if(b.getLife() <= 0) {
+                iterBullets.remove();
+            }
+        }
+
+
+
+        Iterator<Alien> iterAliens = this.getAliens().iterator();
+        while(iterAliens.hasNext()) {
+            Alien a = iterAliens.next();
+
+            a.update(delta);
+
+            if(a.getLife() <= 0) {
+                iterBullets.remove();
+            }
+        }
+
+
+        this.calculateIfLoose();
+    }
+
+
+    private void calculateIfLoose() {
+        for (Alien e: this.getAliens()) {
+            int yValueForLoose = this.ySize + e.getSprite().getyDimension();
+            if(e.getPosition().getY() >= yValueForLoose) {
+                this.gameIsLoose = true;
             }
         }
     }
