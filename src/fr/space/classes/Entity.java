@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 public abstract class Entity {
     private Position position;
     private int life;
+    private float speed = 2.0f;
     private Sprite sprite;
 
 
@@ -13,13 +14,6 @@ public abstract class Entity {
         this.position = position;
         this.life = life;
         this.sprite = sprite;
-    }
-
-
-    public Entity(Position position, int life, String spritePath) {
-        this.position = position;
-        this.life = life;
-        this.sprite = new Sprite(spritePath);
     }
 
 
@@ -57,7 +51,7 @@ public abstract class Entity {
 
 
     public void render(Graphics g) {
-
+        g.drawImage(this.getSprite().getImage(), this.getPosition().getX(), this.getPosition().getY(), null);
     }
 
 
@@ -65,9 +59,17 @@ public abstract class Entity {
 
     }
 
+    public void move(double delta, double xAbsice, double yAbsice) {
+        int newX = (int) (this.getPosition().getX() + xAbsice * this.getSpeed() * delta);
+        int newY = (int) (this.getPosition().getY() + yAbsice * this.getSpeed() * delta);
+
+
+        this.setPosition(new Position(newX, newY));
+    }
+
 
     public void destroy() {
-
+        this.setLife(0);
     }
 
 
@@ -98,5 +100,13 @@ public abstract class Entity {
 
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 }

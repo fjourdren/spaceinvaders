@@ -1,43 +1,19 @@
 package fr.space.classes;
 
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import javax.swing.JOptionPane;
-import javax.swing.JDialog;
 
 public class Sprite {
+    private final static Sprite spriteBullet = new Sprite(RessourceLoader.loadBufferedImage("shot.gif"));
+    private final static Sprite spriteAlien = new Sprite(RessourceLoader.loadBufferedImage("alien.gif"));
+    private final static Sprite spriteShip = new Sprite(RessourceLoader.loadBufferedImage("ship.gif"));
+
     private BufferedImage image;
     private int xDimension, yDimension;
-
-    public Sprite(String imagePath) {
-        this.image = Sprite.loadImage(imagePath);
-        this.calculateSize();
-    }
 
 
     public Sprite(BufferedImage image) {
         this.image = image;
         this.calculateSize();
-    }
-
-
-    public static BufferedImage loadImage(String imagePath) {
-        BufferedImage output = null;
-
-        try {
-            output = ImageIO.read(new File(imagePath));
-        } catch (IOException ex) {
-            JOptionPane optionPane = new JOptionPane("Erreur sur le fichier " + imagePath, JOptionPane.ERROR_MESSAGE);
-            JDialog dialog = optionPane.createDialog("Erreur");
-            dialog.setAlwaysOnTop(true);
-            dialog.setVisible(true);
-
-            System.exit(0);
-        }
-
-        return output;
     }
 
 
@@ -71,8 +47,19 @@ public class Sprite {
         return yDimension;
     }
 
-
     public void setyDimension(int yDimension) {
         this.yDimension = yDimension;
+    }
+
+    public static Sprite getSpriteBullet() {
+        return spriteBullet;
+    }
+
+    public static Sprite getSpriteAlien() {
+        return spriteAlien;
+    }
+
+    public static Sprite getSpriteShip() {
+        return spriteShip;
     }
 }

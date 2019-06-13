@@ -1,7 +1,6 @@
 package fr.space.classes;
 
 import fr.space.views.BoardPanel;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -10,15 +9,22 @@ public class Game implements Runnable {
     private Keyboard keyboard;
 
     private List<Bullet> bullets = new ArrayList<Bullet>();
-    private List<Alien> aliens = new ArrayList<Alien>();
+    //private List<Alien> aliens = new ArrayList<Alien>();
     private Spaceship player;
 
+    private Wave defaultWave;
+    private Alien defaultAlien;
+
+    private Wave wave;
+
     private boolean gameIsLoose = false;
+    private int score = 0;
 
     private int xSize;
     private int ySize;
 
     private boolean running = false;
+    private boolean pause = false;
 
     private BoardPanel boardPanel;
 
@@ -26,8 +32,20 @@ public class Game implements Runnable {
         this.xSize = xSize;
         this.ySize = ySize;
 
-        Sprite sprite = new Sprite("/home/flavien/Dropbox/projet_space_invaders/projet_space_invaders/ship.gif");
-        Spaceship playerShip = new Spaceship(this, new Position((this.xSize / 2) - sprite.getxDimension(), this.ySize - (sprite.getyDimension() + 10)), 1, sprite);
+
+        // default enemy's wave
+        this.defaultAlien = new Alien(null, 1, Sprite.getSpriteAlien());
+        this.defaultAlien.setSpeed(0.0000000000001f);
+
+        this.defaultWave = new Wave(this, 3, 5, this.defaultAlien);
+
+        this.wave = new Wave(this.defaultWave);
+
+
+
+        // spawn player
+        Position playerPosition = new Position((this.xSize / 2) - Sprite.getSpriteShip().getxDimension(), this.ySize - (Sprite.getSpriteShip().getyDimension() + 10));
+        Spaceship playerShip = new Spaceship(this, playerPosition, 1, Sprite.getSpriteShip());
 
         this.setPlayer(playerShip);
     }
@@ -44,7 +62,7 @@ public class Game implements Runnable {
 
         long initialTime = System.nanoTime();
 
-        final double target_UPS = 128, target_FPS = 120;
+        final double target_UPS = 128, target_FPS = 500;
 
         final double timeU = 1000000000 / target_UPS;
         final double timeF = 1000000000 / target_FPS;
@@ -85,6 +103,7 @@ public class Game implements Runnable {
                 timer += 1000;
             }
         }
+
     }
 
 
@@ -94,17 +113,56 @@ public class Game implements Runnable {
 
 
     public void getInput(double delta) {
-        if(this.getKeyboard().getKey(32)) // shoot (espace)
-            this.getPlayer().shoot();
+        if(!this.isPause()) {
+            if (this.getKeyboard().getKey(32)) // shoot (espace)
+                this.getPlayer().shoot();
 
-        if(this.getKeyboard().getKey(37)) // left
-            this.getPlayer().move(delta, -1);
+            if (this.getKeyboard().getKey(37)) // left
+                this.getPlayer().move(delta, -1);
 
-        if(this.getKeyboard().getKey(39)) // right
-            this.getPlayer().move(delta, 1);
+            if (this.getKeyboard().getKey(39)) // right
+                this.getPlayer().move(delta, 1);
+        }
 
-        if(this.getKeyboard().getKey(80)) // pause (p)
-            this.getPlayer().shoot();
+
+        if (this.getKeyboard().getKey(80)) { // pause (p)
+            if(this.isPause()) {
+                this.setPause(false);
+            } else {
+                this.setPause(true);
+            }
+
+
+            // fix multi pressed key problem
+            boolean newKeysValues[] = this.getKeyboard().getKeys();
+            newKeysValues[80] = false;
+            this.getKeyboard().setKeys(newKeysValues);
+        }
+
+
+    }
+
+
+    public void spawnEnemies() {
+        if(this.wave.getAliens().size() == 0) {
+            // default enemy's wave
+            Alien alien = new Alien(null, 1, Sprite.getSpriteAlien());
+            alien.setSpeed(0.0000000000001f);
+
+            this.wave = new Wave(this, 3, 5, alien);
+
+            this.wave.spawn();
+        }
+    }
+
+
+    private void calculateIfLoose() {
+        for (Alien e: this.getWave().getAliens()) {
+            int yValueForLoose = this.ySize - e.getSprite().getyDimension();
+            if(e.getPosition().getY() >= yValueForLoose) {
+                this.gameIsLoose = true;
+            }
+        }
     }
 
 
@@ -112,44 +170,52 @@ public class Game implements Runnable {
 
         this.getInput(delta);
 
+        if(!this.isPause()) {
 
-        this.getPlayer().update(delta);
+            this.spawnEnemies();
 
 
-        Iterator<Bullet> iterBullets = this.getBullets().iterator();
-        while(iterBullets.hasNext()) {
-            Bullet b = iterBullets.next();
+            this.getPlayer().update(delta);
 
-            b.update(delta);
 
-            if(b.getLife() <= 0) {
-                iterBullets.remove();
+            Iterator<Bullet> iterBullets = this.getBullets().iterator();
+            while (iterBullets.hasNext()) {
+                Bullet b = iterBullets.next();
+
+                b.update(delta);
+
+                if (b.getLife() <= 0) {
+                    iterBullets.remove();
+                }
             }
-        }
 
 
+            this.getWave().update(delta);
 
-        Iterator<Alien> iterAliens = this.getAliens().iterator();
-        while(iterAliens.hasNext()) {
-            Alien a = iterAliens.next();
 
-            a.update(delta);
+            // colission calculs
+            Iterator<Bullet> iterBulletsColision = this.getBullets().iterator();
+            Iterator<Alien> iterAliensColision = this.getWave().getAliens().iterator();
 
-            if(a.getLife() <= 0) {
-                iterBullets.remove();
+            while (iterBulletsColision.hasNext()) {
+                Bullet b = iterBulletsColision.next();
+
+                while (iterAliensColision.hasNext()) {
+                    Alien a = iterAliensColision.next();
+
+                    if (a.colisionWith(b)) {
+                        a.destroy();
+                        b.destroy();
+
+                        this.addScore(a.getScore());
+                    }
+                }
             }
-        }
 
 
-        this.calculateIfLoose();
-    }
-
-
-    private void calculateIfLoose() {
-        for (Alien e: this.getAliens()) {
-            int yValueForLoose = this.ySize + e.getSprite().getyDimension();
-            if(e.getPosition().getY() >= yValueForLoose) {
-                this.gameIsLoose = true;
+            this.calculateIfLoose();
+            if (this.gameIsLoose) {
+                System.out.println("loose");
             }
         }
     }
@@ -163,14 +229,17 @@ public class Game implements Runnable {
         this.bullets.remove(bullet);
     }
 
-    public void addAlien(Alien alien) {
-        this.aliens.add(alien);
+    public void addScore(int scoreAdd) {
+        this.setScore(this.getScore() + scoreAdd);
     }
 
-    public void removeAlien(Alien alien) {
-        this.aliens.remove(alien);
+    public int getScore() {
+        return score;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public Keyboard getKeyboard() {
         return keyboard;
@@ -186,14 +255,6 @@ public class Game implements Runnable {
 
     public void setBullets(List<Bullet> bullets) {
         this.bullets = bullets;
-    }
-
-    public List<Alien> getAliens() {
-        return aliens;
-    }
-
-    public void setAliens(List<Alien> aliens) {
-        this.aliens = aliens;
     }
 
     public Spaceship getPlayer() {
@@ -242,5 +303,37 @@ public class Game implements Runnable {
 
     public void setySize(int ySize) {
         this.ySize = ySize;
+    }
+
+    public Wave getDefaultWave() {
+        return defaultWave;
+    }
+
+    public void setDefaultWave(Wave defaultWave) {
+        this.defaultWave = defaultWave;
+    }
+
+    public Alien getDefaultAlien() {
+        return defaultAlien;
+    }
+
+    public void setDefaultAlien(Alien defaultAlien) {
+        this.defaultAlien = defaultAlien;
+    }
+
+    public Wave getWave() {
+        return wave;
+    }
+
+    public void setWave(Wave wave) {
+        this.wave = wave;
+    }
+
+    public boolean isPause() {
+        return pause;
+    }
+
+    public void setPause(boolean pause) {
+        this.pause = pause;
     }
 }
