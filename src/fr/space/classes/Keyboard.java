@@ -5,15 +5,12 @@ import java.awt.event.KeyListener;
 
 public class Keyboard implements KeyListener {
     private boolean keys[];
-    private Spaceship player;
 
-    public Keyboard(Spaceship player) {
+    public Keyboard() {
         this.keys = new boolean[65535];
-        this.player = player;
     }
 
     public void keyTyped(KeyEvent e) {
-
     }
 
     public void keyPressed(KeyEvent e) {
@@ -26,5 +23,14 @@ public class Keyboard implements KeyListener {
 
     public boolean getKey(int key) {
         return keys[key];
+    }
+
+
+    public boolean[] getKeys() {
+        return keys;
+    }
+
+    public void setKeys(boolean[] keys) {
+        this.keys = keys;
     }
 }

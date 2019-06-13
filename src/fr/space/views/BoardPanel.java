@@ -9,9 +9,13 @@ import javax.swing.JPanel;
 public class BoardPanel extends JPanel {
 
     private ControllerSpace controller;
+    private Score score;
+    private Pause pause;
 
     public BoardPanel(ControllerSpace controller) {
         this.controller = controller;
+        this.score = new Score(this);
+        this.pause = new Pause(this);
     }
 
     @Override
@@ -24,10 +28,15 @@ public class BoardPanel extends JPanel {
             e.render(g);
         }
 
-        /*g.setColor(Color.GREEN);
-        // draw the rectangle here
-        g.drawRect(50, 50, 200, 200);*/
+        this.score.render(g);
+
+        if(this.getController().getModel().getGame().isPause()) {
+            this.pause.render(g);
+        }
     }
+
+
+
 
     public ControllerSpace getController() {
         return controller;
@@ -35,5 +44,13 @@ public class BoardPanel extends JPanel {
 
     public void setController(ControllerSpace controller) {
         this.controller = controller;
+    }
+
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
     }
 }

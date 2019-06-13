@@ -3,9 +3,7 @@ package fr.space.main;
 import fr.space.classes.Game;
 import fr.space.models.ModelSpace;
 import fr.space.controllers.ControllerSpace;
-import fr.space.views.ViewSpace;
 import fr.space.views.GameInterface;
-import fr.space.views.ConfigInterface;
 
 public class Run {
 
