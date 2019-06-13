@@ -17,6 +17,8 @@ public class Game implements Runnable {
 
     private Wave wave;
 
+    private int level = 0;
+
     private boolean gameIsLoose = false;
     private int score = 0;
 
@@ -118,10 +120,10 @@ public class Game implements Runnable {
                 this.getPlayer().shoot();
 
             if (this.getKeyboard().getKey(37)) // left
-                this.getPlayer().move(delta, -1);
+                this.getPlayer().move(delta, -1, 0);
 
             if (this.getKeyboard().getKey(39)) // right
-                this.getPlayer().move(delta, 1);
+                this.getPlayer().move(delta, 1, 0);
         }
 
 
@@ -133,7 +135,7 @@ public class Game implements Runnable {
             }
 
 
-            // fix multi pressed key problem
+            // fix mul
             boolean newKeysValues[] = this.getKeyboard().getKeys();
             newKeysValues[80] = false;
             this.getKeyboard().setKeys(newKeysValues);
@@ -152,15 +154,59 @@ public class Game implements Runnable {
             this.wave = new Wave(this, 3, 5, alien);
 
             this.wave.spawn();
+
+            this.setLevel(this.getLevel() + 1);
         }
     }
 
 
     private void calculateIfLoose() {
-        for (Alien e: this.getWave().getAliens()) {
-            int yValueForLoose = this.ySize - e.getSprite().getyDimension();
-            if(e.getPosition().getY() >= yValueForLoose) {
-                this.gameIsLoose = true;
+        this.gameIsLoose = false;
+
+        if(this.getPlayer().getLife() <= 0) {
+            this.gameIsLoose = true;
+        } else {
+            for (Alien e: this.getWave().getAliens()) {
+                int yValueForLoose = this.ySize - e.getSprite().getyDimension();
+                if(e.getPosition().getY() >= yValueForLoose) {
+                    this.gameIsLoose = true;
+                }
+            }
+        }
+
+    }
+
+
+    public void collisionDetection() {
+        Iterator<Alien> iterAliensCollisionPlayer = this.getWave().getAliens().iterator();
+        while (iterAliensCollisionPlayer.hasNext()) {
+            Alien a = iterAliensCollisionPlayer.next();
+
+            if (a.collisionWith(this.getPlayer())) {
+                a.removeLife(1);
+                this.getPlayer().removeLife(1);
+            }
+        }
+
+
+        // colission calculs
+        Iterator<Bullet> iterBulletsCollision = this.getBullets().iterator();
+        Iterator<Alien> iterAliensCollision = this.getWave().getAliens().iterator();
+
+        while (iterBulletsCollision.hasNext()) {
+            Bullet b = iterBulletsCollision.next();
+
+            while (iterAliensCollision.hasNext()) {
+                Alien a = iterAliensCollision.next();
+
+                if (a.collisionWith(b)) {
+                    a.removeLife(1);
+                    b.removeLife(1);
+
+                    if(a.getLife() <= 0) {
+                        this.addScore(a.getScore());
+                    }
+                }
             }
         }
     }
@@ -178,6 +224,7 @@ public class Game implements Runnable {
             this.getPlayer().update(delta);
 
 
+            // update bullets
             Iterator<Bullet> iterBullets = this.getBullets().iterator();
             while (iterBullets.hasNext()) {
                 Bullet b = iterBullets.next();
@@ -192,26 +239,12 @@ public class Game implements Runnable {
 
             this.getWave().update(delta);
 
+            this.collisionDetection();
 
-            // colission calculs
-            Iterator<Bullet> iterBulletsColision = this.getBullets().iterator();
-            Iterator<Alien> iterAliensColision = this.getWave().getAliens().iterator();
 
-            while (iterBulletsColision.hasNext()) {
-                Bullet b = iterBulletsColision.next();
-
-                while (iterAliensColision.hasNext()) {
-                    Alien a = iterAliensColision.next();
-
-                    if (a.colisionWith(b)) {
-                        a.destroy();
-                        b.destroy();
-
-                        this.addScore(a.getScore());
-                    }
-                }
+            if(this.getPlayer().getLife() <= 0) {
+                // "détruire le joueur"
             }
-
 
             this.calculateIfLoose();
             if (this.gameIsLoose) {
@@ -335,5 +368,13 @@ public class Game implements Runnable {
 
     public void setPause(boolean pause) {
         this.pause = pause;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

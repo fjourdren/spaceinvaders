@@ -11,11 +11,17 @@ public class Wave {
 
     private List<Alien> aliens = new ArrayList<Alien>();
 
-    private int margeBeetweenAliens = 5;
+    private int margeBeetweenAliens = 0;
     private int directionX, directionY;
+
+    private int row, col;
 
     public Wave(Game game, int row, int col, Alien alien) {
         this.game = game;
+
+        this.row = row;
+        this.col = col;
+
         this.alien = alien;
 
         this.directionX = 1;
@@ -35,8 +41,8 @@ public class Wave {
 
     public void spawn() {
 
-        for(int i = 0; i < 5; i++) {
-            for(int j = 0; j < 3; j++) {
+        for(int i = 0; i < this.getCol(); i++) {
+            for(int j = 0; j < this.getRow(); j++) {
                 Position pos = new Position(i * (Sprite.getSpriteAlien().getxDimension() + margeBeetweenAliens), j * (Sprite.getSpriteAlien().getyDimension() + margeBeetweenAliens));
 
                 Alien tmpAlien = new Alien(this.getAlien());
@@ -97,8 +103,7 @@ public class Wave {
 
             a.update(delta);
 
-            a.move(delta, this.directionX, this.directionY);
-
+            a.move(delta, this.getDirectionX(), this.getDirectionY());
 
             if(a.getLife() <= 0) {
                 iterAliens.remove();
@@ -162,5 +167,21 @@ public class Wave {
 
     public void setAliens(List<Alien> aliens) {
         this.aliens = aliens;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
     }
 }

@@ -30,7 +30,7 @@ public abstract class Entity {
     }
 
 
-    public boolean colisionWith(Entity e) {
+    public boolean collisionWith(Entity e) {
         int minxImageA = this.getPosition().getX();
         int maxxImageA = this.getPosition().getX() + this.getSprite().getxDimension();
 
@@ -60,8 +60,14 @@ public abstract class Entity {
     }
 
     public void move(double delta, double xAbsice, double yAbsice) {
-        int newX = (int) (this.getPosition().getX() + xAbsice * this.getSpeed() * delta);
-        int newY = (int) (this.getPosition().getY() + yAbsice * this.getSpeed() * delta);
+        int deltaInt = (int) delta;
+
+        if(deltaInt == 0) {
+            deltaInt = 1;
+        }
+
+        int newX = (int) (this.getPosition().getX() + xAbsice * this.getSpeed() * deltaInt);
+        int newY = (int) (this.getPosition().getY() + yAbsice * this.getSpeed() * deltaInt);
 
 
         this.setPosition(new Position(newX, newY));
@@ -70,6 +76,14 @@ public abstract class Entity {
 
     public void destroy() {
         this.setLife(0);
+    }
+
+    public void addLife(int life) {
+        this.setLife(this.getLife() + life);
+    }
+
+    public void removeLife(int life) {
+        this.setLife(this.getLife() - life);
     }
 
 
