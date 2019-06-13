@@ -19,7 +19,6 @@ public class Alien extends Entity {
 
     }
 
-
     public int getScore() {
         return score;
     }

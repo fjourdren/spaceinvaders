@@ -33,11 +33,11 @@ public class Spaceship extends Entity {
         }
     }
 
-    public void move(double delta, double xAbsice) {
+    public void move(double delta, double xAbsice, double yAbsice) {
         int newX = (int) (this.getPosition().getX() + xAbsice * this.getSpeed() * delta);
 
         if(newX >= 0 && newX <= this.getGame().getxSize() - this.getSprite().getxDimension())
-            this.setPosition(new Position(newX, this.getPosition().getY()));
+            super.move(delta, xAbsice, yAbsice);
     }
 
     public Game getGame() {

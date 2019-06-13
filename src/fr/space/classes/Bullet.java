@@ -12,7 +12,7 @@ public class Bullet extends Entity {
 
 
     public void update(double delta) {
-        this.getPosition().setY((int) (this.getPosition().getY() - this.getSpeed() * delta));
+        this.move(delta, 0, -1);
 
         int pixelLimitToDestroyObject =  0 - this.getSprite().getyDimension();
         if(this.getPosition().getY() < pixelLimitToDestroyObject) {
