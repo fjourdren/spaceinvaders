@@ -139,11 +139,7 @@ public class Game implements Runnable {
 
 
         if (!this.isGameIsLoose() && this.getKeyboard().getKey(80)) { // pause (P)
-            if(this.isPause()) {
-                this.setPause(false);
-            } else {
-                this.setPause(true);
-            }
+            this.turnPause();
 
 
             // fix mul
@@ -263,6 +259,14 @@ public class Game implements Runnable {
             }
 
             this.calculateIfLoose();
+        }
+    }
+
+    public void turnPause() {
+        if(this.isPause()) {
+            this.setPause(false);
+        } else {
+            this.setPause(true);
         }
     }
 
