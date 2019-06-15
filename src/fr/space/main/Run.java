@@ -22,15 +22,12 @@ public class Run {
 
         ControllerSpace controler = new ControllerSpace(conv);
 
-        //ViewSpace configInterface = new ConfigInterface(controler, "Config - SpaceInvaders");
-
         ViewSpace vs = new ViewSpace(controler, "SpaceInvaders - Hunt the ShalaK", widthBoard, widthInfos, height);
-
+        //ViewSpace configInterface = new ConfigInterface(controler, "Config - SpaceInvaders");
 
         // game loop start
         Thread gameThread = new Thread(game);
         gameThread.start();
 
     }
-
 }

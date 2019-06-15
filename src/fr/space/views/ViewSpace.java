@@ -2,6 +2,7 @@ package fr.space.views;
 
 import fr.space.classes.Keyboard;
 import fr.space.controllers.ControllerSpace;
+import fr.space.views.menuActions.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,15 +35,31 @@ public class ViewSpace extends View {
         JMenuItem itemNewGame = new JMenuItem("Nouvelle Partie");
         JMenuItem itemPause = new JMenuItem("Pause");
 
-        JMenu menuConfiguration = new JMenu("Configurations");
+        JMenu menuOpenConfiguration = new JMenu("Configurations");
         JMenu menuQuitter = new JMenu("Quitter");
 
+
+        // build menu
         menuGame.add(itemNewGame);
         menuGame.add(itemPause);
 
         menuBar.add(menuGame);
-        menuBar.add(menuConfiguration);
+        menuBar.add(menuOpenConfiguration);
         menuBar.add(menuQuitter);
+
+
+        // setup action
+        NewGameAction actionNewGame = new NewGameAction(this.getController());
+        itemNewGame.addActionListener(actionNewGame);
+
+        PauseAction actionPause = new PauseAction(this.getController());
+        itemPause.addActionListener(actionPause);
+
+        OpenConfigurationAction actionOpenConfiguration = new OpenConfigurationAction(this.getController());
+        menuOpenConfiguration.addMenuListener(actionOpenConfiguration);
+
+        QuitAction actionQuit = new QuitAction(this.getController());
+        menuQuitter.addMenuListener(actionQuit);
 
         return menuBar;
     }
