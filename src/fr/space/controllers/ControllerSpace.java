@@ -14,6 +14,8 @@ public class ControllerSpace extends Controller {
         this.getModel().getGame().setBoardPanel(boardPanel);
     }
 
+    public BoardPanel getBoardPanel() { return this.getModel().getGame().getBoardPanel(); }
+
     public void setKeyboard(Keyboard keyboard) {
         this.getModel().getGame().setKeyboard(keyboard);
     }

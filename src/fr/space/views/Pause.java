@@ -14,15 +14,16 @@ public class Pause extends JPanel {
     public void render(Graphics g) {
         int scoresSize = 50;
 
-        g.setFont(new Font("TimesRoman", Font.BOLD, scoresSize));
-        g.setColor(Color.WHITE);
-
         String pause = "Pause";
+
+        // pause render
+        g.setFont(new Font("Serif", Font.BOLD, scoresSize));
+        g.setColor(Color.WHITE);
 
         int widthPause = g.getFontMetrics().stringWidth(pause);
         int heightPause = g.getFontMetrics().stringWidth(pause);
 
-        g.drawString(pause, (this.getParentBoard().getWidth() - widthPause) / 2, (this.getParentBoard().getHeight() - heightPause)/ 2);
+        g.drawString(pause, (this.getParentBoard().getWidth() - widthPause) / 2, (this.getParentBoard().getHeight() - heightPause) / 2);
     }
 
     public BoardPanel getParentBoard() {

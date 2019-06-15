@@ -3,16 +3,18 @@ package fr.space.main;
 import fr.space.classes.Game;
 import fr.space.models.ModelSpace;
 import fr.space.controllers.ControllerSpace;
-import fr.space.views.GameInterface;
+import fr.space.views.ViewSpace;
 
 public class Run {
 
     public static void main (String[] args) {
 
-        final int width = 500;
         final int height = 600;
 
-        Game game = new Game(width, height - 33); // remove 33 has OS window
+        final int widthBoard = 500;
+        final int widthInfos = 200;
+
+        Game game = new Game(widthBoard, height);
 
 
         // create interface
@@ -20,12 +22,15 @@ public class Run {
 
         ControllerSpace controler = new ControllerSpace(conv);
 
-        GameInterface gameInterface = new GameInterface(controler, "SpaceInvaders - Hunt the Kalash", width, height);
         //ViewSpace configInterface = new ConfigInterface(controler, "Config - SpaceInvaders");
+
+        ViewSpace vs = new ViewSpace(controler, "SpaceInvaders - Hunt the ShalaK", widthBoard, widthInfos, height);
+
 
         // game loop start
         Thread gameThread = new Thread(game);
         gameThread.start();
+
     }
 
 }

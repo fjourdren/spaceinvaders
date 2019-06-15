@@ -1,6 +1,8 @@
 package fr.space.classes;
 
 import fr.space.views.BoardPanel;
+
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -8,8 +10,7 @@ import java.util.Iterator;
 public class Game implements Runnable {
     private Keyboard keyboard;
 
-    private List<Bullet> bullets = new ArrayList<Bullet>();
-    //private List<Alien> aliens = new ArrayList<Alien>();
+    private List<Bullet> bullets;
     private Spaceship player;
 
     private Wave defaultWave;
@@ -24,6 +25,8 @@ public class Game implements Runnable {
 
     private int xSize;
     private int ySize;
+
+    private final int menuSize = 50;
 
     private boolean running = false;
     private boolean pause = false;
@@ -41,20 +44,28 @@ public class Game implements Runnable {
 
         this.defaultWave = new Wave(this, 3, 5, this.defaultAlien);
 
-        this.wave = new Wave(this.defaultWave);
-
-
-
-        // spawn player
-        Position playerPosition = new Position((this.xSize / 2) - Sprite.getSpriteShip().getxDimension(), this.ySize - (Sprite.getSpriteShip().getyDimension() + 10));
-        Spaceship playerShip = new Spaceship(this, playerPosition, 1, Sprite.getSpriteShip());
-
-        this.setPlayer(playerShip);
+        this.reset();
     }
 
     public Game(BoardPanel boardPanel, int ySize) {
         this.boardPanel = boardPanel;
         this.ySize = ySize;
+    }
+
+
+    public void reset() {
+        this.setBullets(new ArrayList<Bullet>());
+
+        this.setScore(0);
+        this.setLevel(0);
+
+        this.setWave(new Wave(this.getDefaultWave()));
+
+        Position playerPosition = new Position((this.xSize / 2) - Sprite.getSpriteShip().getxDimension(), this.ySize - (Sprite.getSpriteShip().getyDimension() + 10 + menuSize)); // margin + menu size
+        Spaceship playerShip = new Spaceship(this, playerPosition, 1, Sprite.getSpriteShip());
+        this.setPlayer(playerShip);
+
+        this.setGameIsLoose(false);
     }
 
 
@@ -115,7 +126,7 @@ public class Game implements Runnable {
 
 
     public void getInput(double delta) {
-        if(!this.isPause()) {
+        if(!this.isPause() && !this.isGameIsLoose()) {
             if (this.getKeyboard().getKey(32)) // shoot (espace)
                 this.getPlayer().shoot();
 
@@ -127,7 +138,7 @@ public class Game implements Runnable {
         }
 
 
-        if (this.getKeyboard().getKey(80)) { // pause (p)
+        if (!this.isGameIsLoose() && this.getKeyboard().getKey(80)) { // pause (P)
             if(this.isPause()) {
                 this.setPause(false);
             } else {
@@ -142,6 +153,11 @@ public class Game implements Runnable {
         }
 
 
+        if(this.isGameIsLoose()) {
+            if(this.getKeyboard().getKey(82)) { // start game after a game over (R)
+                this.reset();
+            }
+        }
     }
 
 
@@ -168,7 +184,7 @@ public class Game implements Runnable {
         } else {
             for (Alien e: this.getWave().getAliens()) {
                 int yValueForLoose = this.ySize - e.getSprite().getyDimension();
-                if(e.getPosition().getY() >= yValueForLoose) {
+                if(e.getPosition().getY() - menuSize >= yValueForLoose) {
                     this.gameIsLoose = true;
                 }
             }
@@ -216,7 +232,7 @@ public class Game implements Runnable {
 
         this.getInput(delta);
 
-        if(!this.isPause()) {
+        if(!this.isPause() && !this.isGameIsLoose()) {
 
             this.spawnEnemies();
 
@@ -247,9 +263,6 @@ public class Game implements Runnable {
             }
 
             this.calculateIfLoose();
-            if (this.gameIsLoose) {
-                System.out.println("loose");
-            }
         }
     }
 

@@ -9,30 +9,31 @@ import javax.swing.JPanel;
 public class BoardPanel extends JPanel {
 
     private ControllerSpace controller;
-    private Score score;
+    private GameOver gameover;
     private Pause pause;
 
-    public BoardPanel(ControllerSpace controller) {
+    public BoardPanel(ControllerSpace controller, int width, int height) {
         this.controller = controller;
-        this.score = new Score(this);
+        this.gameover = new GameOver(this);
         this.pause = new Pause(this);
+
+        this.setPreferredSize(new Dimension(width, height));
     }
 
     @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void paint(Graphics g) {
+        super.paint(g);
 
-        setBackground(Color.BLACK);
+        this.setBackground(Color.BLACK);
 
         for (Entity e: this.getController().getModel().getEntities()) {
             e.render(g);
         }
 
-        this.score.render(g);
-
-        if(this.getController().getModel().getGame().isPause()) {
+        if(this.getController().getModel().getGame().isGameIsLoose())
+            this.gameover.render(g);
+        else if(this.getController().getModel().getGame().isPause())
             this.pause.render(g);
-        }
     }
 
 
@@ -44,13 +45,5 @@ public class BoardPanel extends JPanel {
 
     public void setController(ControllerSpace controller) {
         this.controller = controller;
-    }
-
-    public Score getScore() {
-        return score;
-    }
-
-    public void setScore(Score score) {
-        this.score = score;
     }
 }
