@@ -6,7 +6,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public abstract class View extends JFrame implements Observer {
     private ControllerSpace controller;
@@ -21,13 +20,22 @@ public abstract class View extends JFrame implements Observer {
 
         this.controller = controller;
         this.controller.getModel().addObserver(this);
+
+
+        // frame
+        this.setSize(this.getWidth(), this.getHeight());
+        this.setTitle(this.getTitle());
+
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.setLocationByPlatform(true);
     }
 
 
-    public abstract void initWindow();
-
+    public abstract void buildWindow();
 
     public abstract void update(Observable observable, Object o);
+
 
     public ControllerSpace getController() {
         return this.controller;

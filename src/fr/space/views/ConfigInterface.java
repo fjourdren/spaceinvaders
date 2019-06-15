@@ -11,7 +11,7 @@ public class ConfigInterface extends View {
     }
 
 
-    public void initWindow() {
+    public void buildWindow() {
 
     }
 
