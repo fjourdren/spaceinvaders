@@ -7,19 +7,21 @@ public class Sprite {
     private final static Sprite spriteAlien = new Sprite(RessourceLoader.loadBufferedImage("alien.gif"));
     private final static Sprite spriteShip = new Sprite(RessourceLoader.loadBufferedImage("ship.gif"));
 
+    private final static Sprite background = new Sprite(RessourceLoader.loadBufferedImage("background.jpg"));
+
     private BufferedImage image;
     private int xDimension, yDimension;
 
 
     public Sprite(BufferedImage image) {
-        this.image = image;
+        this.setImage(image);
         this.calculateSize();
     }
 
 
     public void calculateSize() {
-        this.xDimension = this.image.getWidth();
-        this.yDimension = this.image.getHeight();
+        this.setxDimension(this.image.getWidth());
+        this.setyDimension(this.image.getHeight());
     }
 
 
@@ -61,5 +63,9 @@ public class Sprite {
 
     public static Sprite getSpriteShip() {
         return spriteShip;
+    }
+
+    public static Sprite getBackground() {
+        return background;
     }
 }

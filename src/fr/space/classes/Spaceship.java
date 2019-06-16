@@ -7,12 +7,13 @@ public class Spaceship extends Entity {
 
 
     private static long shootInterval = 500000000; //0.5s in nanosecond
-    private static long lastShootTime;
+    private long lastShootTime;
 
     public Spaceship(Game game, Position position, int life, Sprite sprite) {
         super(position, life, sprite);
-        this.game = game;
-        this.lastShootTime = System.nanoTime();
+
+        this.setGame(game);
+        this.setLastShootTime(System.nanoTime());
     }
 
 
@@ -24,12 +25,14 @@ public class Spaceship extends Entity {
     public void shoot() {
         long now = System.nanoTime();
 
-        if (now - this.lastShootTime > shootInterval) {
+        if (now - this.getLastShootTime() > Spaceship.getShootInterval()) {
 
             Position bulletPosition = new Position((this.getPosition().getX() + (this.getSprite().getxDimension() / 2)) - Sprite.getSpriteBullet().getxDimension() / 2, this.getPosition().getY());
 
-            this.lastShootTime = System.nanoTime();
-            this.game.addBullet(new Bullet(this.game, bulletPosition, 1, Sprite.getSpriteBullet()));
+            this.setLastShootTime(System.nanoTime());
+
+            Bullet bulletToAdd = new Bullet(this.getGame(), bulletPosition, 1, Sprite.getSpriteBullet());
+            this.getGame().addBullet(bulletToAdd);
         }
     }
 
@@ -54,5 +57,13 @@ public class Spaceship extends Entity {
 
     public static void setShootInterval(long shootInterval) {
         Spaceship.shootInterval = shootInterval;
+    }
+
+    public long getLastShootTime() {
+        return lastShootTime;
+    }
+
+    public void setLastShootTime(long lastShootTime) {
+        this.lastShootTime = lastShootTime;
     }
 }

@@ -11,13 +11,17 @@ public class ControllerSpace extends Controller {
     }
 
     public void setBoard(BoardPanel boardPanel) {
-        this.getModel().getGame().setBoardPanel(boardPanel);
+        this.getGameModel().getGame().setBoardPanel(boardPanel);
     }
 
-    public BoardPanel getBoardPanel() { return this.getModel().getGame().getBoardPanel(); }
+    public BoardPanel getBoardPanel() { return this.getGameModel().getGame().getBoardPanel(); }
 
     public void setKeyboard(Keyboard keyboard) {
-        this.getModel().getGame().setKeyboard(keyboard);
+        this.getGameModel().getGame().setKeyboard(keyboard);
+    }
+
+    public int getScore() {
+        return this.getGameModel().getGame().getScore();
     }
 
 }

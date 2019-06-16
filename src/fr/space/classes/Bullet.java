@@ -7,7 +7,8 @@ public class Bullet extends Entity {
 
     public Bullet(Game game, Position position, int life, Sprite sprite) {
         super(position, life, sprite);
-        this.game = game;
+
+        this.setGame(game);
     }
 
 
@@ -18,5 +19,14 @@ public class Bullet extends Entity {
         if(this.getPosition().getY() < pixelLimitToDestroyObject) {
             this.destroy();
         }
+    }
+
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 }

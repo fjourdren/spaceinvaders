@@ -6,10 +6,10 @@ import javax.swing.event.*;
 import javax.swing.*;
 
 public class QuitAction implements MenuListener {
-    ControllerSpace controllerSpace;
+    private ControllerSpace controllerSpace;
 
     public QuitAction(ControllerSpace controllerSpace) {
-        this.controllerSpace = controllerSpace;
+        this.setControllerSpace(controllerSpace);
     }
 
     @Override

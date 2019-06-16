@@ -5,14 +5,14 @@ import fr.space.controllers.ControllerSpace;
 import  java.awt.event.*;
 
 public class PauseAction implements ActionListener {
-    ControllerSpace controllerSpace;
+    private ControllerSpace controllerSpace;
 
     public PauseAction(ControllerSpace controllerSpace) {
-        this.controllerSpace = controllerSpace;
+        this.setControllerSpace(controllerSpace);
     }
 
     public void actionPerformed(ActionEvent e) {
-        this.getControllerSpace().getModel().getGame().turnPause();
+        this.getControllerSpace().getGameModel().getGame().turnPause();
     }
 
     public ControllerSpace getControllerSpace() {

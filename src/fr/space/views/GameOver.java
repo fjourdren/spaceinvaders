@@ -8,7 +8,7 @@ public class GameOver extends JPanel {
     private BoardPanel parentBoard;
 
     public GameOver(BoardPanel parentBoard) {
-        this.parentBoard = parentBoard;
+        this.setParentBoard(parentBoard);
     }
 
     public void render(Graphics g) {
@@ -27,7 +27,7 @@ public class GameOver extends JPanel {
         g.drawString(gameover, (this.getParentBoard().getWidth() - widthGameOver) / 2, (this.getParentBoard().getHeight() - heightGameOver) / 2);
 
 
-        // play key render
+        // redémarrer une partie label
         g.setFont(new Font("Serif", Font.BOLD, (int) (GameOverSize * 0.6)));
         g.setColor(Color.WHITE);
 

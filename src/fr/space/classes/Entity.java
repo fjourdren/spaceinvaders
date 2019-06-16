@@ -11,22 +11,22 @@ public abstract class Entity {
 
 
     public Entity(Position position, int life, Sprite sprite) {
-        this.position = position;
-        this.life = life;
-        this.sprite = sprite;
+        this.setPosition(position);
+        this.setLife(life);
+        this.setSprite(sprite);
     }
 
 
     public Entity(Position position, int life, BufferedImage spriteImage) {
-        this.position = position;
-        this.life = life;
-        this.sprite = new Sprite(spriteImage);
+        this.setPosition(position);
+        this.setLife(life);
+        this.setSprite(new Sprite(spriteImage));
     }
 
 
     public Entity(Position position, int life) {
-        this.position = position;
-        this.life = life;
+        this.setPosition(position);
+        this.setLife(life);
     }
 
 

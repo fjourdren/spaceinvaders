@@ -6,10 +6,10 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 public class OpenConfigurationAction implements MenuListener {
-    ControllerSpace controllerSpace;
+    private ControllerSpace controllerSpace;
 
     public OpenConfigurationAction(ControllerSpace controllerSpace) {
-        this.controllerSpace = controllerSpace;
+        this.setControllerSpace(controllerSpace);
     }
 
     @Override

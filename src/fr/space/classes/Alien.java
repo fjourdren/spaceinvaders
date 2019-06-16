@@ -7,6 +7,7 @@ public class Alien extends Entity {
 
     public Alien(Alien alien) {
         super(alien.getPosition(), alien.getLife(), alien.getSprite());
+        
         this.setScore(alien.getScore());
     }
 
