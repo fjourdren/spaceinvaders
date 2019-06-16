@@ -15,12 +15,14 @@ public class ViewSpace extends View {
 
     private int widthBoard, widthInfo, heightWindow;
 
+    private JLabel scoreValue, aliensValue, levelValue;
+
     public ViewSpace(ControllerSpace controller, String title, int widthBoard, int widthInfo, int heightWindow) {
         super(controller, title, widthBoard + widthInfo, heightWindow);
 
-        this.widthBoard = widthBoard;
-        this.widthInfo = widthInfo;
-        this.heightWindow = heightWindow;
+        this.setWidthBoard(widthBoard);
+        this.setWidthInfo(widthInfo);
+        this.setHeightWindow(heightWindow);
 
 
         this.buildWindow();
@@ -66,12 +68,44 @@ public class ViewSpace extends View {
 
     public JPanel buildInfoPanel(int width, int height) {
         JPanel infos = new JPanel();
+        infos.setLayout(new GridLayout(3,2));
 
-        infos.add(new JLabel("Score :"));
-        infos.add(new JLabel("Nb Aliens :"));
-        infos.add(new JLabel("Niveau :"));
+        // labels
+        JLabel scoreLabel = new JLabel("Score :");
+        scoreLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        JLabel aliensLabel = new JLabel("Nb Aliens :");
+        aliensLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        JLabel levelLabel = new JLabel("Niveau :");
+        levelLabel.setHorizontalAlignment(JLabel.CENTER);
+
+
+        // values labels
+        this.setScoreValue(new JLabel("0"));
+        this.getScoreValue().setHorizontalAlignment(JLabel.CENTER);
+
+        this.setAliensValue(new JLabel("4"));
+        this.getAliensValue().setHorizontalAlignment(JLabel.CENTER);
+
+        this.setLevelValue(new JLabel("5"));
+        this.getLevelValue().setHorizontalAlignment(JLabel.CENTER);
+
+
+        // ajout des éléments
+        infos.add(scoreLabel);
+        infos.add(this.getScoreValue());
+
+        infos.add(aliensLabel);
+        infos.add(this.getAliensValue());
+
+        infos.add(levelLabel);
+        infos.add(this.getLevelValue());
+
 
         infos.setPreferredSize(new Dimension(width, height));
+
+        infos.setVisible(true);
 
         return infos;
     }
@@ -79,10 +113,10 @@ public class ViewSpace extends View {
 
     public void buildWindow() {
         // === init ===
-        this.boardPanel = new BoardPanel(this.getController(), this.getWidthBoard(), this.getHeightWindow());
+        this.setBoardPanel(new BoardPanel(this.getController(), this.getWidthBoard(), this.getHeightWindow()));
         this.getController().setBoard(this.getBoardPanel());
 
-        this.infoPanel = this.buildInfoPanel(this.getWidthInfo(), this.getHeightWindow());
+        this.setInfoPanel(this.buildInfoPanel(this.getWidthInfo(), this.getHeightWindow()));
 
         JMenuBar menu = this.buildMenu();
 
@@ -111,7 +145,7 @@ public class ViewSpace extends View {
 
 
     public void update(Observable observable, Object o) {
-
+        this.scoreValue.setText(String.valueOf(this.getController().getScore()));
     }
 
 
@@ -153,5 +187,29 @@ public class ViewSpace extends View {
 
     public void setHeightWindow(int heightWindow) {
         this.heightWindow = heightWindow;
+    }
+
+    public JLabel getScoreValue() {
+        return scoreValue;
+    }
+
+    public void setScoreValue(JLabel scoreValue) {
+        this.scoreValue = scoreValue;
+    }
+
+    public JLabel getAliensValue() {
+        return aliensValue;
+    }
+
+    public void setAliensValue(JLabel aliensValue) {
+        this.aliensValue = aliensValue;
+    }
+
+    public JLabel getLevelValue() {
+        return levelValue;
+    }
+
+    public void setLevelValue(JLabel levelValue) {
+        this.levelValue = levelValue;
     }
 }

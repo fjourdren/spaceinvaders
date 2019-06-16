@@ -17,25 +17,25 @@ public class Wave {
     private int row, col;
 
     public Wave(Game game, int row, int col, Alien alien) {
-        this.game = game;
+        this.setGame(game);
 
-        this.row = row;
-        this.col = col;
+        this.setRow(row);
+        this.setCol(col);
 
-        this.alien = alien;
+        this.setAlien(alien);
 
-        this.directionX = 1;
-        this.directionY = 0;
+        this.setDirectionX(1);
+        this.setDirectionY(0);
     }
 
 
     public Wave(Wave wave) {
-        this.game = wave.getGame();
-        this.alien = wave.getAlien();
-        this.margeBeetweenAliens = wave.getMargeBeetweenAliens();
+        this.setGame(wave.getGame());
+        this.setAlien(wave.getAlien());
+        this.setMargeBeetweenAliens(wave.getMargeBeetweenAliens());
 
-        this.directionX = wave.getDirectionX();
-        this.directionY = wave.getDirectionY();
+        this.setDirectionX(wave.getDirectionX());
+        this.setDirectionY(wave.getDirectionY());
     }
 
 
@@ -43,7 +43,7 @@ public class Wave {
 
         for(int i = 0; i < this.getCol(); i++) {
             for(int j = 0; j < this.getRow(); j++) {
-                Position pos = new Position(i * (Sprite.getSpriteAlien().getxDimension() + margeBeetweenAliens), j * (Sprite.getSpriteAlien().getyDimension() + margeBeetweenAliens));
+                Position pos = new Position(i * (Sprite.getSpriteAlien().getxDimension() + this.getMargeBeetweenAliens()), j * (Sprite.getSpriteAlien().getyDimension() + this.getMargeBeetweenAliens()));
 
                 Alien tmpAlien = new Alien(this.getAlien());
                 tmpAlien.setPosition(pos);
@@ -92,8 +92,8 @@ public class Wave {
         this.setDirectionY(0);
 
         if(minXAlien() < 0 || maxXAlien() > this.getGame().getxSize()) {
-            this.directionX = -directionX;
-            this.directionY = 5;
+            this.setDirectionX(-this.getDirectionX());
+            this.setDirectionY(5);
         }
 
 

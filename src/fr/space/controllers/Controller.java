@@ -6,11 +6,15 @@ public abstract class Controller {
     private ModelSpace gameModel;
 
     public Controller(ModelSpace gameModel) {
-        this.gameModel = gameModel;
+        this.setGameModel(gameModel);
     }
 
 
-    public ModelSpace getModel() {
-        return this.gameModel;
+    public ModelSpace getGameModel() {
+        return gameModel;
+    }
+
+    public void setGameModel(ModelSpace gameModel) {
+        this.gameModel = gameModel;
     }
 }

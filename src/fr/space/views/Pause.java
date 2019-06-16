@@ -8,7 +8,7 @@ public class Pause extends JPanel {
     private BoardPanel parentBoard;
 
     public Pause(BoardPanel parentBoard) {
-        this.parentBoard = parentBoard;
+        this.setParentBoard(parentBoard);
     }
 
     public void render(Graphics g) {

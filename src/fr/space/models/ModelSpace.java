@@ -11,7 +11,7 @@ public class ModelSpace extends Model {
     private Game game;
 
     public ModelSpace(Game game) {
-        this.game = game;
+        this.setGame(game);
     }
 
     public Game getGame() {

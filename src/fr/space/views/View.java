@@ -9,22 +9,15 @@ import javax.swing.JFrame;
 
 public abstract class View extends JFrame implements Observer {
     private ControllerSpace controller;
-    private String title = "";
-    private int width, height;
-
 
     public View(ControllerSpace controller, String title, int width, int height) {
-        this.title = title;
-        this.width = width;
-        this.height = height;
-
-        this.controller = controller;
-        this.controller.getModel().addObserver(this);
+        this.setController(controller);
+        this.getController().getGameModel().addObserver(this);
 
 
         // frame
-        this.setSize(this.getWidth(), this.getHeight());
-        this.setTitle(this.getTitle());
+        this.setSize(width, height);
+        this.setTitle(title);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -43,38 +36,5 @@ public abstract class View extends JFrame implements Observer {
 
     public void setController(ControllerSpace controller) {
         this.controller = controller;
-    }
-
-
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-
-    @Override
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 }

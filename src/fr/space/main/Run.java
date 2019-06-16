@@ -12,7 +12,7 @@ public class Run {
         final int height = 600;
 
         final int widthBoard = 500;
-        final int widthInfos = 200;
+        final int widthInfos = 210;
 
         Game game = new Game(widthBoard, height);
 

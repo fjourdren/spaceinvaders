@@ -7,7 +7,7 @@ public class Keyboard implements KeyListener {
     private boolean keys[];
 
     public Keyboard() {
-        this.keys = new boolean[65535];
+        this.setKeys(new boolean[65535]);
     }
 
     public void keyTyped(KeyEvent e) {

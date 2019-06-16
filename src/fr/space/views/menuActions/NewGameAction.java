@@ -6,14 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class NewGameAction implements ActionListener {
-    ControllerSpace controllerSpace;
+    private ControllerSpace controllerSpace;
 
     public NewGameAction(ControllerSpace controllerSpace) {
-        this.controllerSpace = controllerSpace;
+        this.setControllerSpace(controllerSpace);
     }
 
     public void actionPerformed(ActionEvent e) {
-        this.getControllerSpace().getModel().getGame().reset();
+        this.getControllerSpace().getGameModel().getGame().reset();
     }
 
     public ControllerSpace getControllerSpace() {
