@@ -10,6 +10,7 @@ public class Game implements Runnable {
     private Keyboard keyboard;
 
     private List<Bullet> bullets;
+    private List<Explosion> explosions;
     private Spaceship player;
 
     private Wave defaultWave;
@@ -61,6 +62,7 @@ public class Game implements Runnable {
 
     public void reset() {
         this.setBullets(new ArrayList<Bullet>());
+        this.setExplosions(new ArrayList<Explosion>());
 
         this.setScore(0);
         this.setLevel(0);
@@ -244,6 +246,19 @@ public class Game implements Runnable {
             this.getPlayer().update(delta);
 
 
+            // update explosions
+            Iterator<Explosion> iterExplosions = this.getExplosions().iterator();
+            while (iterExplosions.hasNext()) {
+                Explosion e = iterExplosions.next();
+
+                e.update(delta);
+
+                if (e.getLife() <= 0) {
+                    iterExplosions.remove();
+                }
+            }
+
+
             // update bullets
             Iterator<Bullet> iterBullets = this.getBullets().iterator();
             while (iterBullets.hasNext()) {
@@ -291,16 +306,27 @@ public class Game implements Runnable {
 
 
     public void addBullet(Bullet bullet) {
-        this.bullets.add(bullet);
+        this.getBullets().add(bullet);
     }
 
     public void removeBullet(Bullet bullet) {
-        this.bullets.remove(bullet);
+        this.getBullets().remove(bullet);
+    }
+
+    public void addExplosion(Explosion explosion) {
+        this.getExplosions().add(explosion);
+    }
+
+    public void removeExplosion(Explosion explosion) {
+        this.getExplosions().remove(explosion);
     }
 
     public void addScore(int scoreAdd) {
         this.setScore(this.getScore() + scoreAdd);
     }
+
+
+
 
     public int getScore() {
         return score;
@@ -416,5 +442,13 @@ public class Game implements Runnable {
 
     public void setRunningUpdate(boolean runningUpdate) {
         this.runningUpdate = runningUpdate;
+    }
+
+    public List<Explosion> getExplosions() {
+        return explosions;
+    }
+
+    public void setExplosions(List<Explosion> explosions) {
+        this.explosions = explosions;
     }
 }

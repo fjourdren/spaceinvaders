@@ -18,7 +18,7 @@ public class Spaceship extends Entity {
 
 
     public void update(double delta) {
-
+        
     }
 
 
