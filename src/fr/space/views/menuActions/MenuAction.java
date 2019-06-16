@@ -1,21 +1,25 @@
 package fr.space.views.menuActions;
 
 import fr.space.controllers.ControllerSpace;
+import fr.space.main.Run;
 
-import javax.swing.event.*;
 import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.*;
 
-public class QuitAction implements MenuListener {
+public class MenuAction implements MenuListener {
     private ControllerSpace controllerSpace;
 
-    public QuitAction(ControllerSpace controllerSpace) {
+    public MenuAction(ControllerSpace controllerSpace) {
         this.setControllerSpace(controllerSpace);
     }
 
     @Override
     public void menuSelected(MenuEvent e) {
         JMenu source = (JMenu) e.getSource();
-        if(source.getText() == "Quitter") {
+        if(source.getText() == "Configurations") {
+            Run.openConfigView(this.getControllerSpace());
+        } else if(source.getText() == "Quitter") {
             System.exit(0);
         }
     }
