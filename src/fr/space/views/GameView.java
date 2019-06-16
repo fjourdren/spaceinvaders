@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 
-public class ViewSpace extends View {
+public class GameView extends View {
 
     private JPanel infoPanel;
     private BoardPanel boardPanel;
@@ -17,7 +17,7 @@ public class ViewSpace extends View {
 
     private JLabel scoreValue, aliensValue, levelValue;
 
-    public ViewSpace(ControllerSpace controller, String title, int widthBoard, int widthInfo, int heightWindow) {
+    public GameView(ControllerSpace controller, String title, int widthBoard, int widthInfo, int heightWindow) {
         super(controller, title, widthBoard + widthInfo, heightWindow);
 
         this.setWidthBoard(widthBoard);
@@ -57,11 +57,11 @@ public class ViewSpace extends View {
         PauseAction actionPause = new PauseAction(this.getController());
         itemPause.addActionListener(actionPause);
 
-        OpenConfigurationAction actionOpenConfiguration = new OpenConfigurationAction(this.getController());
+        MenuAction actionOpenConfiguration = new MenuAction(this.getController());
         menuOpenConfiguration.addMenuListener(actionOpenConfiguration);
 
-        QuitAction actionQuit = new QuitAction(this.getController());
-        menuQuitter.addMenuListener(actionQuit);
+        MenuAction menuAction = new MenuAction(this.getController());
+        menuQuitter.addMenuListener(menuAction);
 
         return menuBar;
     }
