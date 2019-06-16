@@ -20,10 +20,11 @@ public class Run {
         // create interface
         ModelSpace conv = new ModelSpace(game);
 
-        ControllerSpace controler = new ControllerSpace(conv);
+        ControllerSpace controller = new ControllerSpace(conv);
 
-        ViewSpace vs = new ViewSpace(controler, "SpaceInvaders - Hunt the ShalaK", widthBoard, widthInfos, height);
-        //ViewSpace configInterface = new ConfigInterface(controler, "Config - SpaceInvaders");
+        //ViewSpace vs = new ViewSpace(controller, "SpaceInvaders - Hunt the ShalaK", widthBoard, widthInfos, height);
+        ViewSpace v = new ViewSpace(controller, "test", widthBoard, widthInfos, height);
+        //ViewSpace configInterface = new ConfigInterface(controller, "Config - SpaceInvaders");
 
         // game loop start
         Thread gameThread = new Thread(game);

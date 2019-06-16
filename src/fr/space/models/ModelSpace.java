@@ -27,6 +27,7 @@ public class ModelSpace extends Model {
     public List<Entity> getEntities() {
         List<Entity> entities = new ArrayList<Entity>();
 
+        entities.addAll(this.getGame().getExplosions());
         entities.addAll(this.getGame().getWave().getAliens());
         entities.addAll(this.getGame().getBullets());
         entities.add(this.getGame().getPlayer());

@@ -106,6 +106,9 @@ public class Wave {
             a.move(delta, this.getDirectionX(), this.getDirectionY());
 
             if(a.getLife() <= 0) {
+                Explosion explo = new Explosion(a.getPosition());
+                this.getGame().addExplosion(explo);
+
                 iterAliens.remove();
             }
         }

@@ -7,6 +7,8 @@ public class Sprite {
     private final static Sprite spriteAlien = new Sprite(RessourceLoader.loadBufferedImage("alien.gif"));
     private final static Sprite spriteShip = new Sprite(RessourceLoader.loadBufferedImage("ship.gif"));
 
+    private final static Sprite spriteExplosion = new Sprite(RessourceLoader.loadBufferedImage("explosion.png"));
+
     private final static Sprite background = new Sprite(RessourceLoader.loadBufferedImage("background.jpg"));
 
     private BufferedImage image;
@@ -67,5 +69,9 @@ public class Sprite {
 
     public static Sprite getBackground() {
         return background;
+    }
+
+    public static Sprite getSpriteExplosion() {
+        return spriteExplosion;
     }
 }
