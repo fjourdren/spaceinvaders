@@ -10,6 +10,8 @@ import java.util.Observable;
 
 public class ConfigView extends View {
 
+
+
     public ConfigView(ControllerSpace controller, String title, int width, int height) {
         super(controller, title, width, height);
 

@@ -39,6 +39,8 @@ public class BoardPanel extends JPanel {
             this.getGameover().render(g);
         else if(this.getController().getGameModel().getGame().isPause())
             this.getPause().render(g);
+
+        Toolkit.getDefaultToolkit().sync();
     }
 
 
