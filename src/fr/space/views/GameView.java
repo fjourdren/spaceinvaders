@@ -2,7 +2,7 @@ package fr.space.views;
 
 import fr.space.classes.Keyboard;
 import fr.space.controllers.ControllerSpace;
-import fr.space.views.menuActions.*;
+import fr.space.views.viewActions.*;
 
 import javax.swing.*;
 import java.awt.*;
