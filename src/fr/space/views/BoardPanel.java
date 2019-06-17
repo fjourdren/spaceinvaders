@@ -40,6 +40,7 @@ public class BoardPanel extends JPanel {
         else if(this.getController().getGameModel().getGame().isPause())
             this.getPause().render(g);
 
+        // fix lags
         Toolkit.getDefaultToolkit().sync();
     }
 

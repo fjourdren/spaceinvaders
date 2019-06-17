@@ -11,7 +11,7 @@ public class Wave {
 
     private List<Alien> aliens = new ArrayList<Alien>();
 
-    private int margeBeetweenAliens = 0;
+    private int margeBeetweenAliens = 5;
     private int directionX, directionY;
 
     private int row, col;
@@ -111,6 +111,13 @@ public class Wave {
 
                 iterAliens.remove();
             }
+        }
+    }
+
+
+    public void setSpeedToAllAliens(float newSpeed) {
+        for (Alien a: this.getAliens()) {
+            a.setSpeed(newSpeed);
         }
     }
 
