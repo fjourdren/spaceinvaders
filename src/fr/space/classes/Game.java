@@ -42,7 +42,7 @@ public class Game implements Runnable {
         // default enemy's wave
         Alien alienDef = new Alien(null, 1, Sprite.getSpriteAlien());
         this.setDefaultAlien(alienDef);
-        this.getDefaultAlien().setSpeed(0.0000000000001f);
+        this.getDefaultAlien().setSpeed(1);
 
         // create default wave
         Wave waveDef = new Wave(this, 3, 5, this.getDefaultAlien());

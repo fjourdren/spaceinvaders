@@ -3,6 +3,7 @@ package fr.space.views;
 import fr.space.classes.Sprite;
 import fr.space.controllers.ControllerSpace;
 import fr.space.views.viewActions.JFileChooserConfigAction;
+import fr.space.views.viewActions.SaveConfigAction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,19 @@ import java.util.Observable;
 
 public class ConfigView extends View {
 
+    private String bulletSpritePath = null;
+    private String spaceshipSpritePath = null;
+    private String explosionSpritePath = null;
+    private String backgroundPath = null;
 
+    private long intervalShoot;
+    private int numberAliens;
+    private float speedAliens;
+
+
+    private JTextField textFieldInterval;
+    private JTextField textFieldNumber;
+    private JTextField textFieldSpeed;
 
     public ConfigView(ControllerSpace controller, String title, int width, int height) {
         super(controller, title, width, height);
@@ -75,24 +88,25 @@ public class ConfigView extends View {
 
 
         JLabel labelInterval = new JLabel("Intervalle tire :");
-        JTextField textFieldInterval = new JTextField();
+        this.setTextFieldInterval(new JTextField());
 
         top.add(labelInterval);
-        top.add(textFieldInterval);
+        top.add(this.getTextFieldInterval());
 
 
         JLabel labelNumber = new JLabel("Nombre Aliens :");
-        JTextField textFieldNumber = new JTextField();
+        this.setTextFieldNumber(new JTextField());
 
         top.add(labelNumber);
-        top.add(textFieldNumber);
+        top.add(this.getTextFieldNumber());
 
 
         JLabel labelSpeed = new JLabel("Vitesse des Aliens :");
-        JTextField textFieldSpeed = new JTextField();
+        this.setTextFieldSpeed(new JTextField());
 
         top.add(labelSpeed);
-        top.add(textFieldSpeed);
+        top.add(this.getTextFieldSpeed());
+
 
 
 
@@ -100,7 +114,9 @@ public class ConfigView extends View {
         // generate bot
         JPanel bot = new JPanel();
 
-        bot.add(new JButton("Sauvegarder"));
+        JButton saveButton = new JButton("Sauvegarder");
+        saveButton.addActionListener(new SaveConfigAction(this));
+        bot.add(saveButton);
 
 
         panelStructure.add(top, BorderLayout.CENTER);
@@ -139,5 +155,86 @@ public class ConfigView extends View {
 
     public void update(Observable observable, Object o) {
 
+    }
+
+
+    public String getBulletSpritePath() {
+        return bulletSpritePath;
+    }
+
+    public void setBulletSpritePath(String bulletSpritePath) {
+        this.bulletSpritePath = bulletSpritePath;
+    }
+
+    public String getSpaceshipSpritePath() {
+        return spaceshipSpritePath;
+    }
+
+    public void setSpaceshipSpritePath(String spaceshipSpritePath) {
+        this.spaceshipSpritePath = spaceshipSpritePath;
+    }
+
+    public String getExplosionSpritePath() {
+        return explosionSpritePath;
+    }
+
+    public void setExplosionSpritePath(String explosionSpritePath) {
+        this.explosionSpritePath = explosionSpritePath;
+    }
+
+    public String getBackgroundPath() {
+        return backgroundPath;
+    }
+
+    public void setBackgroundPath(String backgroundPath) {
+        this.backgroundPath = backgroundPath;
+    }
+
+    public long getIntervalShoot() {
+        return intervalShoot;
+    }
+
+    public void setIntervalShoot(long intervalShoot) {
+        this.intervalShoot = intervalShoot;
+    }
+
+    public int getNumberAliens() {
+        return numberAliens;
+    }
+
+    public void setNumberAliens(int numberAliens) {
+        this.numberAliens = numberAliens;
+    }
+
+    public float getSpeedAliens() {
+        return speedAliens;
+    }
+
+    public void setSpeedAliens(float speedAliens) {
+        this.speedAliens = speedAliens;
+    }
+
+    public JTextField getTextFieldInterval() {
+        return textFieldInterval;
+    }
+
+    public void setTextFieldInterval(JTextField textFieldInterval) {
+        this.textFieldInterval = textFieldInterval;
+    }
+
+    public JTextField getTextFieldNumber() {
+        return textFieldNumber;
+    }
+
+    public void setTextFieldNumber(JTextField textFieldNumber) {
+        this.textFieldNumber = textFieldNumber;
+    }
+
+    public JTextField getTextFieldSpeed() {
+        return textFieldSpeed;
+    }
+
+    public void setTextFieldSpeed(JTextField textFieldSpeed) {
+        this.textFieldSpeed = textFieldSpeed;
     }
 }

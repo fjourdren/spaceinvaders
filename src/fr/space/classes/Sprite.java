@@ -3,9 +3,9 @@ package fr.space.classes;
 import java.awt.image.BufferedImage;
 
 public class Sprite {
-    private static Sprite spriteBullet = new Sprite(RessourceLoader.loadBufferedImageFromRessources("shot.gif"));
-    private static Sprite spriteAlien = new Sprite(RessourceLoader.loadBufferedImageFromRessources("alien.gif"));
-    private static Sprite spriteShip = new Sprite(RessourceLoader.loadBufferedImageFromRessources("ship.gif"));
+    private static Sprite spriteBullet = new Sprite(RessourceLoader.loadBufferedImageFromRessources("shot.png"));
+    private static Sprite spriteAlien = new Sprite(RessourceLoader.loadBufferedImageFromRessources("alien.png"));
+    private static Sprite spriteShip = new Sprite(RessourceLoader.loadBufferedImageFromRessources("ship.png"));
 
     private static Sprite spriteExplosion = new Sprite(RessourceLoader.loadBufferedImageFromRessources("explosion.png"));
 
