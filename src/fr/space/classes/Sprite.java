@@ -21,8 +21,8 @@ public class Sprite {
 
 
     public void calculateSize() {
-        this.setxDimension(this.image.getWidth());
-        this.setyDimension(this.image.getHeight());
+        this.setxDimension(this.getImage().getWidth());
+        this.setyDimension(this.getImage()   .getHeight());
     }
 
 
