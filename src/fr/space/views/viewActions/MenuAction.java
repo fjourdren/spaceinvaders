@@ -1,11 +1,10 @@
-package fr.space.views.menuActions;
+package fr.space.views.viewActions;
 
 import fr.space.controllers.ControllerSpace;
 import fr.space.main.Run;
 
 import javax.swing.*;
 import javax.swing.event.*;
-import java.awt.*;
 
 public class MenuAction implements MenuListener {
     private ControllerSpace controllerSpace;

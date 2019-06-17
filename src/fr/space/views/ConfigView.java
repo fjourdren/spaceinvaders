@@ -1,12 +1,11 @@
 package fr.space.views;
 
+import fr.space.classes.Sprite;
 import fr.space.controllers.ControllerSpace;
+import fr.space.views.viewActions.JFileChooserConfigAction;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.event.*;
 import java.awt.*;
-import java.io.File;
 import java.util.Observable;
 
 public class ConfigView extends View {
@@ -39,22 +38,7 @@ public class ConfigView extends View {
         JLabel labelSpriteBullet = new JLabel("Sprite Bullet :");
         JButton buttonParcourirBullet = new JButton("Parcourir...");
 
-        buttonParcourirBullet.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser jf = new JFileChooser();
-                FileNameExtensionFilter extensionsFilter = new FileNameExtensionFilter("JPG, PNG & GIF Images", "jpg", "gif", "png");
-
-                jf.setFileFilter(extensionsFilter);
-                jf.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
-                if(jf.showOpenDialog((Component) e.getSource()) == JFileChooser.APPROVE_OPTION) {
-                    File dir = jf.getCurrentDirectory();
-                    File file = jf.getSelectedFile();
-
-                    System.out.println(file);
-                }
-            }
-        });
+        buttonParcourirBullet.addActionListener(new JFileChooserConfigAction(Sprite.getSpriteBullet()));
 
         top.add(labelSpriteBullet);
         top.add(buttonParcourirBullet);

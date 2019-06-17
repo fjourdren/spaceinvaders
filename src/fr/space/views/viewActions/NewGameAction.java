@@ -1,4 +1,4 @@
-package fr.space.views.menuActions;
+package fr.space.views.viewActions;
 
 import fr.space.controllers.ControllerSpace;
 
