@@ -7,6 +7,7 @@ import fr.space.views.viewActions.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
+import javax.swing.border.*;
 
 public class GameView extends View {
 
@@ -67,29 +68,61 @@ public class GameView extends View {
     }
 
     public JPanel buildInfoPanel(int width, int height) {
+        Font font1 = new Font("Courier New", Font.BOLD, 25);
+        Font font2 = new Font("Courier New", Font.ITALIC, 23);
+
+
+        Border marginPanel = new EmptyBorder(0,10,0,5);
+        Border marginValues = new EmptyBorder(1,0,10,0);
+
+
         JPanel infos = new JPanel();
         infos.setLayout(new BoxLayout(infos, BoxLayout.Y_AXIS));
 
+        // set panel's margins
+        Border borderPanel = infos.getBorder();
+        infos.setBorder(new CompoundBorder(borderPanel, marginPanel));
+
         // labels
         JLabel scoreLabel = new JLabel("Score :");
-        scoreLabel.setHorizontalAlignment(JLabel.CENTER);
+        scoreLabel.setFont(font1);
 
         JLabel aliensLabel = new JLabel("Nb Aliens :");
-        aliensLabel.setHorizontalAlignment(JLabel.CENTER);
+        aliensLabel.setFont(font1);
 
         JLabel levelLabel = new JLabel("Niveau :");
-        levelLabel.setHorizontalAlignment(JLabel.CENTER);
+        levelLabel.setFont(font1);
 
 
         // values labels
-        this.setScoreValue(new JLabel("0"));
-        this.getScoreValue().setHorizontalAlignment(JLabel.CENTER);
+        // init jlabel score value
+        JLabel tmpScore = new JLabel("0");
+        tmpScore.setFont(font2);
 
-        this.setAliensValue(new JLabel("4"));
-        this.getAliensValue().setHorizontalAlignment(JLabel.CENTER);
+        Border borderScore = tmpScore.getBorder();
+        tmpScore.setBorder(new CompoundBorder(borderScore, marginValues));
 
-        this.setLevelValue(new JLabel("5"));
-        this.getLevelValue().setHorizontalAlignment(JLabel.CENTER);
+        this.setScoreValue(tmpScore);
+
+
+        // init jlabel aliens number value
+        JLabel tmpAliens = new JLabel("4");
+        tmpAliens.setFont(font2);
+
+        Border borderAliens = tmpScore.getBorder();
+        tmpAliens.setBorder(new CompoundBorder(borderAliens, marginValues));
+
+        this.setAliensValue(tmpAliens);
+
+
+        // init jlabel level value
+        JLabel tmpLevel = new JLabel("5");
+        tmpLevel.setFont(font2);
+
+        Border borderLevel = tmpScore.getBorder();
+        tmpLevel.setBorder(new CompoundBorder(borderLevel, marginValues));
+
+        this.setLevelValue(tmpLevel);
 
 
         // ajout des éléments
