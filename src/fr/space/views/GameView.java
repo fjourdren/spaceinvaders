@@ -130,7 +130,7 @@ public class GameView extends View {
         this.add(this.getInfoPanel());
 
         // structure
-        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.X_AXIS));
 
         this.setVisible(true);
     }
