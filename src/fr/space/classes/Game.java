@@ -169,9 +169,9 @@ public class Game implements Runnable {
         if(this.getWave().getAliens().size() == 0) {
             // default enemy's wave
             Alien alien = new Alien(null, 1, Sprite.getSpriteAlien());
-            alien.setSpeed(0.0000000000001f);
+            alien.setSpeed(1);
 
-            Wave waveToSet = new Wave(this, 3, 5, alien);
+            Wave waveToSet = new Wave(this.getDefaultWave());
             this.setWave(waveToSet);
 
             this.getWave().spawn();
@@ -275,11 +275,6 @@ public class Game implements Runnable {
             this.getWave().update(delta);
 
             this.collisionDetection();
-
-
-            if(this.getPlayer().getLife() <= 0) {
-                // "détruire le joueur"
-            }
 
             this.calculateIfLoose();
         }

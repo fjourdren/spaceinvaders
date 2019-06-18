@@ -6,8 +6,6 @@ import fr.space.controllers.ControllerSpace;
 import fr.space.views.ConfigView;
 import fr.space.views.GameView;
 
-import java.awt.*;
-
 public class Run {
 
     public static GameView gameView;

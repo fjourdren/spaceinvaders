@@ -1,6 +1,5 @@
 package fr.space.views;
 
-import fr.space.classes.Sprite;
 import fr.space.controllers.ControllerSpace;
 import fr.space.views.viewActions.JFileChooserConfigAction;
 import fr.space.views.viewActions.SaveConfigAction;
@@ -12,6 +11,7 @@ import java.util.Observable;
 public class ConfigView extends View {
 
     private String bulletSpritePath = null;
+    private String alienSpritePath = null;
     private String spaceshipSpritePath = null;
     private String explosionSpritePath = null;
     private String backgroundPath = null;
@@ -22,8 +22,10 @@ public class ConfigView extends View {
 
 
     private JTextField textFieldInterval;
-    private JTextField textFieldNumber;
+    private JTextField textFieldRow;
+    private JTextField textFieldCol;
     private JTextField textFieldSpeed;
+
 
     public ConfigView(ControllerSpace controller, String title, int width, int height) {
         super(controller, title, width, height);
@@ -44,7 +46,7 @@ public class ConfigView extends View {
         // generate top
         JPanel top = new JPanel();
 
-        top.setLayout(new GridLayout(8,2));
+        top.setLayout(new GridLayout(9,2));
         top.setBorder(BorderFactory.createEmptyBorder(5, 10, 3, 10));
 
 
@@ -53,7 +55,7 @@ public class ConfigView extends View {
         JLabel labelSpriteBullet = new JLabel("Sprite Bullet :");
         JButton buttonParcourirBullet = new JButton("Parcourir...");
 
-        buttonParcourirBullet.addActionListener(new JFileChooserConfigAction(Sprite.getSpriteBullet()));
+        buttonParcourirBullet.addActionListener(new JFileChooserConfigAction(this, "bullet"));
 
         top.add(labelSpriteBullet);
         top.add(buttonParcourirBullet);
@@ -62,12 +64,16 @@ public class ConfigView extends View {
         JLabel labelSpriteAlien = new JLabel("Sprite Alien :");
         JButton buttonParcourirALien = new JButton("Parcourir...");
 
+        buttonParcourirALien.addActionListener(new JFileChooserConfigAction(this, "alien"));
+
         top.add(labelSpriteAlien);
         top.add(buttonParcourirALien);
 
 
         JLabel labelSpriteSpaceShip = new JLabel("Sprite SpaceShip :");
         JButton buttonParcourirSpaceShip = new JButton("Parcourir...");
+
+        buttonParcourirSpaceShip.addActionListener(new JFileChooserConfigAction(this, "spaceship"));
 
         top.add(labelSpriteSpaceShip);
         top.add(buttonParcourirSpaceShip);
@@ -76,29 +82,40 @@ public class ConfigView extends View {
         JLabel labelSpriteExplosion = new JLabel("Sprite Explosion :");
         JButton buttonParcourirExplosion = new JButton("Parcourir...");
 
+        buttonParcourirExplosion.addActionListener(new JFileChooserConfigAction(this, "explosion"));
+
         top.add(labelSpriteExplosion);
         top.add(buttonParcourirExplosion);
 
 
-        JLabel labelBackground = new JLabel("Background :");
+        JLabel labelBackground = new JLabel("Arrière plan :");
         JButton buttonParcourirBackground = new JButton("Parcourir...");
+
+        buttonParcourirBackground.addActionListener(new JFileChooserConfigAction(this, "background"));
 
         top.add(labelBackground);
         top.add(buttonParcourirBackground);
 
 
-        JLabel labelInterval = new JLabel("Intervalle tire :");
+        JLabel labelInterval = new JLabel("Intervalle de tir (en nanoseconde) :");
         this.setTextFieldInterval(new JTextField());
 
         top.add(labelInterval);
         top.add(this.getTextFieldInterval());
 
 
-        JLabel labelNumber = new JLabel("Nombre Aliens :");
-        this.setTextFieldNumber(new JTextField());
+        JLabel labelNumberRowAliens = new JLabel("Nombre lignes d'aliens :");
+        this.setTextFieldRow(new JTextField());
 
-        top.add(labelNumber);
-        top.add(this.getTextFieldNumber());
+        top.add(labelNumberRowAliens);
+        top.add(this.getTextFieldRow());
+
+
+        JLabel labelNumberColAliens = new JLabel("Nombre colonnes d'aliens :");
+        this.setTextFieldCol(new JTextField());
+
+        top.add(labelNumberColAliens);
+        top.add(this.getTextFieldCol());
 
 
         JLabel labelSpeed = new JLabel("Vitesse des Aliens :");
@@ -222,19 +239,35 @@ public class ConfigView extends View {
         this.textFieldInterval = textFieldInterval;
     }
 
-    public JTextField getTextFieldNumber() {
-        return textFieldNumber;
-    }
-
-    public void setTextFieldNumber(JTextField textFieldNumber) {
-        this.textFieldNumber = textFieldNumber;
-    }
-
     public JTextField getTextFieldSpeed() {
         return textFieldSpeed;
     }
 
     public void setTextFieldSpeed(JTextField textFieldSpeed) {
         this.textFieldSpeed = textFieldSpeed;
+    }
+
+    public JTextField getTextFieldRow() {
+        return textFieldRow;
+    }
+
+    public void setTextFieldRow(JTextField textFieldRow) {
+        this.textFieldRow = textFieldRow;
+    }
+
+    public JTextField getTextFieldCol() {
+        return textFieldCol;
+    }
+
+    public void setTextFieldCol(JTextField textFieldCol) {
+        this.textFieldCol = textFieldCol;
+    }
+
+    public String getAlienSpritePath() {
+        return alienSpritePath;
+    }
+
+    public void setAlienSpritePath(String alienSpritePath) {
+        this.alienSpritePath = alienSpritePath;
     }
 }
