@@ -68,7 +68,7 @@ public class GameView extends View {
 
     public JPanel buildInfoPanel(int width, int height) {
         JPanel infos = new JPanel();
-        infos.setLayout(new GridLayout(3,2));
+        infos.setLayout(new BoxLayout(infos, BoxLayout.Y_AXIS));
 
         // labels
         JLabel scoreLabel = new JLabel("Score :");

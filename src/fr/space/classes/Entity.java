@@ -44,7 +44,6 @@ public abstract class Entity {
         int minyImageB = e.getPosition().getY();
         int maxyImageB = e.getPosition().getY() + e.getSprite().getyDimension();
 
-
         return (minxImageA < maxxImageB && maxxImageA > minxImageB &&
                 minyImageA < maxyImageB && maxyImageA > minyImageB);
     }

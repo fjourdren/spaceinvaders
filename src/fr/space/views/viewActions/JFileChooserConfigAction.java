@@ -2,21 +2,23 @@ package fr.space.views.viewActions;
 
 import fr.space.classes.RessourceLoader;
 import fr.space.classes.Sprite;
+import fr.space.views.ConfigView;
 
 import javax.swing.*;
 import java.awt.Component;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class JFileChooserConfigAction implements ActionListener {
 
-    private Sprite sprite;
+    private ConfigView parent;
+    private String toSet;
 
-    public JFileChooserConfigAction(Sprite sprite) {
-        this.setSprite(sprite);
+    public JFileChooserConfigAction(ConfigView parent, String toSet) {
+        this.setParent(parent);
+        this.setToSet(toSet);
     }
 
 
@@ -31,17 +33,40 @@ public class JFileChooserConfigAction implements ActionListener {
             //File dir = jf.getCurrentDirectory();
             File file = jf.getSelectedFile();
 
-            BufferedImage newImage = RessourceLoader.loadBufferedImage(file.getPath());
-            this.getSprite().setImage(newImage);
+            switch(this.getToSet()) {
+                case "bullet":
+                    this.getParent().setBulletSpritePath(file.getPath());
+                    break;
+                case "alien":
+                    this.getParent().setAlienSpritePath(file.getPath());
+                    break;
+                case "spaceship":
+                    this.getParent().setSpaceshipSpritePath(file.getPath());
+                    break;
+                case "explosion":
+                    this.getParent().setExplosionSpritePath(file.getPath());
+                    break;
+                case "background":
+                    this.getParent().setBackgroundPath(file.getPath());
+                    break;
+            }
         }
     }
 
 
-    public Sprite getSprite() {
-        return sprite;
+    public ConfigView getParent() {
+        return parent;
     }
 
-    public void setSprite(Sprite sprite) {
-        this.sprite = sprite;
+    public void setParent(ConfigView parent) {
+        this.parent = parent;
+    }
+
+    public String getToSet() {
+        return toSet;
+    }
+
+    public void setToSet(String toSet) {
+        this.toSet = toSet;
     }
 }

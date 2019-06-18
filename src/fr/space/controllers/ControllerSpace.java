@@ -1,11 +1,10 @@
 package fr.space.controllers;
 
-import fr.space.classes.Alien;
 import fr.space.classes.Keyboard;
+import fr.space.classes.Spaceship;
+import fr.space.classes.Wave;
 import fr.space.models.ModelSpace;
 import fr.space.views.BoardPanel;
-
-import java.util.List;
 
 public class ControllerSpace extends Controller {
 
@@ -14,30 +13,22 @@ public class ControllerSpace extends Controller {
     }
 
     public void applyConfigIntervalShoot(long interval) {
-        this.getGameModel().getGame().getPlayer();
+        Spaceship.setShootInterval(interval);
     }
 
 
-    public void applyConfigNumber(float number) {
-        List<Alien> aliens = this.getGameModel().getGame().getWave().getAliens();
+    public void applyConfigNumberAliens(int row, int col) {
+        Wave wave = this.getGameModel().getGame().getDefaultWave();
 
-        if(number < aliens.size()) {
-            int val = 0;
-            for (Alien a: aliens) {
-                ++val;
-
-                if(val > number) {
-                    a.setLife(0);
-                }
-            }
-        }
-
+        wave.setRow(row);
+        wave.setCol(col);
     }
 
 
     public void applyConfigSpeed(float speed) {
         this.getGameModel().getGame().getWave().setSpeedToAllAliens(speed);
     }
+
 
     public void setBoard(BoardPanel boardPanel) {
         this.getGameModel().getGame().setBoardPanel(boardPanel);

@@ -31,7 +31,12 @@ public class Wave {
 
     public Wave(Wave wave) {
         this.setGame(wave.getGame());
+
+        this.setRow(wave.getRow());
+        this.setCol(wave.getCol());
+
         this.setAlien(wave.getAlien());
+
         this.setMargeBeetweenAliens(wave.getMargeBeetweenAliens());
 
         this.setDirectionX(wave.getDirectionX());
