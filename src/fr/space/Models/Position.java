@@ -1,13 +1,23 @@
 package fr.space.Models;
 
 public class Position extends Model {
+
     private int x, y;
 
+
+    /*
+     * Constructors
+     * */
     public Position(int x, int y) {
         this.setX(x);
         this.setY(y);
     }
 
+
+
+    /*
+     * GETTER & SETTER
+     * */
     public int getX() {
         return x;
     }

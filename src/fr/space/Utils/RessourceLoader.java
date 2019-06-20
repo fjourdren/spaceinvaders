@@ -6,13 +6,18 @@ import java.io.File;
 
 public class RessourceLoader {
 
+    /*
+     * Methods
+     * */
+    // chargement d'un fichier depuis les ressources du programme
     public static BufferedImage loadBufferedImageFromRessources(String pathImage) {
         BufferedImage image = null;
 
-        pathImage = "../Ressources/" + pathImage;
+        pathImage = "../Ressources/" + pathImage; // on ajoute le path du dossier ressource au pathImage
 
+        // on essaye de load l'image
         try {
-            if (RessourceLoader.class.getResource(pathImage) == null) {
+            if (RessourceLoader.class.getResource(pathImage) == null) { // vérifie si l'image existe
                 throw new RuntimeException("Can't find resource: " + pathImage);
             }
 
@@ -28,7 +33,7 @@ public class RessourceLoader {
 
     }
 
-
+    // chargement d'une image depuis n'importe où sur la machine
     public static BufferedImage loadBufferedImage(String path) {
         BufferedImage image = null;
 

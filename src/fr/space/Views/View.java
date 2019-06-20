@@ -8,9 +8,15 @@ import java.util.Observer;
 import javax.swing.JFrame;
 
 public abstract class View extends JFrame implements Observer {
+
     private ControllerGame controller;
 
+
+    /*
+     * Constructors
+     * */
     public View(ControllerGame controller, String title, int width, int height) {
+        // on génère une JFrame commune à toutes nos fenêtres
         this.setController(controller);
         this.getController().getGameModel().addObserver(this);
 
@@ -25,11 +31,19 @@ public abstract class View extends JFrame implements Observer {
     }
 
 
+
+    /*
+     * Methods
+     * */
     public abstract void buildWindow();
 
     public abstract void update(Observable observable, Object o);
 
 
+
+    /*
+     * GETTER & SETTER
+     * */
     public ControllerGame getController() {
         return this.controller;
     }

@@ -16,6 +16,10 @@ public class Wave extends Model {
 
     private int row, col;
 
+
+    /*
+     * Constructors
+     * */
     public Wave(GameModel gameModel, int row, int col, Alien alien) {
         this.setGameModel(gameModel);
 
@@ -27,7 +31,6 @@ public class Wave extends Model {
         this.setDirectionX(1);
         this.setDirectionY(0);
     }
-
 
     public Wave(Wave wave) {
         this.setGameModel(wave.getGameModel());
@@ -44,6 +47,10 @@ public class Wave extends Model {
     }
 
 
+
+    /*
+     * Methods
+     * */
     public void spawn() {
 
         for(int i = 0; i < this.getCol(); i++) {
@@ -58,14 +65,10 @@ public class Wave extends Model {
         }
     }
 
-
     public int minXAlien() {
         int output = 999999;
 
-        Iterator<Alien> iterAliens = this.getAliens().iterator();
-        while(iterAliens.hasNext()) {
-            Alien a = iterAliens.next();
-
+        for (Alien a: this.getAliens()) {
             if(a.getPosition().getX() < output) {
                 output = a.getPosition().getX();
             }
@@ -74,14 +77,10 @@ public class Wave extends Model {
         return output;
     }
 
-
     public int maxXAlien() {
         int output = -999999;
 
-        Iterator<Alien> iterAliens = this.getAliens().iterator();
-        while(iterAliens.hasNext()) {
-            Alien a = iterAliens.next();
-
+        for (Alien a: this.getAliens()) {
             if(a.getPosition().getX() > output) {
                 output = a.getPosition().getX() + a.getSprite().getxDimension();
             }
@@ -89,7 +88,6 @@ public class Wave extends Model {
 
         return output;
     }
-
 
     public void update(double delta) {
 
@@ -120,13 +118,11 @@ public class Wave extends Model {
         }
     }
 
-
     public void setSpeedToAllAliens(float newSpeed) {
         for (Alien a: this.getAliens()) {
             a.setSpeed(newSpeed);
         }
     }
-
 
     public void addAlien(Alien alien) {
         this.getAliens().add(alien);
@@ -139,6 +135,10 @@ public class Wave extends Model {
     }
 
 
+
+    /*
+     * GETTER & SETTER
+     * */
     public GameModel getGameModel() {
         return gameModel;
     }

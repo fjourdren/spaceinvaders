@@ -1,12 +1,16 @@
 package fr.space.Models;
 
 public class Spaceship extends Entity {
-    private GameModel gameModel;
 
+    private GameModel gameModel;
 
     private static long shootInterval = 500000000; //0.5s in nanosecond
     private long lastShootTime;
 
+
+    /*
+     * Constructors
+     * */
     public Spaceship(GameModel gameModel, Position position, int life, Sprite sprite) {
         super(position, life, sprite);
 
@@ -15,10 +19,13 @@ public class Spaceship extends Entity {
     }
 
 
+
+    /*
+     * Methods
+     * */
     public void update(double delta) {
         
     }
-
 
     public void shoot() {
         long now = System.nanoTime();
@@ -29,7 +36,7 @@ public class Spaceship extends Entity {
 
             this.setLastShootTime(System.nanoTime());
 
-            Bullet bulletToAdd = new Bullet(this.getGameModel(), bulletPosition, 1, Sprite.getSpriteBullet());
+            Bullet bulletToAdd = new Bullet(this.getGameModel(), bulletPosition, 1, Sprite.getSpriteBullet(), this);
             this.getGameModel().addBullet(bulletToAdd);
         }
     }
@@ -41,6 +48,11 @@ public class Spaceship extends Entity {
             super.move(delta, xAbsice, yAbsice);
     }
 
+
+
+    /*
+     * GETTER & SETTER
+     * */
     public GameModel getGameModel() {
         return gameModel;
     }
