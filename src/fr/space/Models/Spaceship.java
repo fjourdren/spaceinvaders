@@ -1,6 +1,4 @@
-package fr.space.Classes;
-
-import fr.space.Models.GameModel;
+package fr.space.Models;
 
 public class Spaceship extends Entity {
     private GameModel gameModel;

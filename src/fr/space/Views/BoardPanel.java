@@ -1,7 +1,9 @@
 package fr.space.Views;
 
-import fr.space.Classes.Entity;
+import fr.space.Models.Entity;
 import fr.space.Controllers.ControllerGame;
+import fr.space.Views.SubViews.GameOver;
+import fr.space.Views.SubViews.Pause;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

@@ -1,8 +1,8 @@
 package fr.space.Controllers;
 
-import fr.space.Classes.Keyboard;
-import fr.space.Classes.Spaceship;
-import fr.space.Classes.Wave;
+import fr.space.Models.Keyboard;
+import fr.space.Models.Spaceship;
+import fr.space.Models.Wave;
 import fr.space.Views.BoardPanel;
 import fr.space.Models.GameModel;
 
@@ -54,5 +54,25 @@ public class ControllerGame extends Controller {
 
     public int getNbAlien() {
         return this.getGameModel().getNbAlien();
+    }
+
+
+    public long getShootInterval() {
+        return this.getGameModel().getPlayer().getShootInterval();
+    }
+
+
+    public float getAliensSpeed() {
+        return this.getGameModel().getWave().getAlien().getSpeed();
+    }
+
+
+    public int getAliensRow() {
+        return this.getGameModel().getWave().getRow();
+    }
+
+
+    public int getAliensCol() {
+        return this.getGameModel().getWave().getCol();
     }
 }

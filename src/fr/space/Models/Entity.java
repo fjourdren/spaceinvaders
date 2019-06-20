@@ -1,9 +1,9 @@
-package fr.space.Classes;
+package fr.space.Models;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public abstract class Entity {
+public abstract class Entity extends Model {
     private Position position;
     private int life;
     private float speed = 2.0f;

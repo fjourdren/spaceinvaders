@@ -1,6 +1,6 @@
-package fr.space.Classes;
+package fr.space.Models;
 
-public class Position {
+public class Position extends Model {
     private int x, y;
 
     public Position(int x, int y) {

@@ -1,4 +1,4 @@
-package fr.space.Views.viewActions;
+package fr.space.Views.ViewActions;
 
 import fr.space.Controllers.ControllerGame;
 import fr.space.Main.Run;
