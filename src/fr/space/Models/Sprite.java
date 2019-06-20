@@ -1,10 +1,10 @@
-package fr.space.Classes;
+package fr.space.Models;
 
 import fr.space.Utils.RessourceLoader;
 
 import java.awt.image.BufferedImage;
 
-public class Sprite {
+public class Sprite extends Model {
     private static Sprite spriteBullet = new Sprite(RessourceLoader.loadBufferedImageFromRessources("shot.png"));
     private static Sprite spriteAlien = new Sprite(RessourceLoader.loadBufferedImageFromRessources("alien.png"));
     private static Sprite spriteShip = new Sprite(RessourceLoader.loadBufferedImageFromRessources("ship.png"));
@@ -12,6 +12,7 @@ public class Sprite {
     private static Sprite spriteExplosion = new Sprite(RessourceLoader.loadBufferedImageFromRessources("explosion.png"));
 
     private static Sprite background = new Sprite(RessourceLoader.loadBufferedImageFromRessources("background.jpg"));
+
 
     private BufferedImage image;
     private int xDimension, yDimension;

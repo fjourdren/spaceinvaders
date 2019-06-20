@@ -1,8 +1,8 @@
 package fr.space.Views;
 
-import fr.space.Classes.Keyboard;
+import fr.space.Models.Keyboard;
 import fr.space.Controllers.ControllerGame;
-import fr.space.Views.viewActions.*;
+import fr.space.Views.ViewActions.*;
 
 import javax.swing.*;
 import java.awt.*;

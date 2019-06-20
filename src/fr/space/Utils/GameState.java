@@ -1,4 +1,4 @@
-package fr.space.Classes;
+package fr.space.Utils;
 
 public enum GameState {
     PAUSE,

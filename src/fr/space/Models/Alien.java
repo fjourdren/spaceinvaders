@@ -1,4 +1,4 @@
-package fr.space.Classes;
+package fr.space.Models;
 
 public class Alien extends Entity {
 

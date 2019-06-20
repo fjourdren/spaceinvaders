@@ -1,8 +1,8 @@
 package fr.space.Views;
 
 import fr.space.Controllers.ControllerGame;
-import fr.space.Views.viewActions.JFileChooserConfigAction;
-import fr.space.Views.viewActions.SaveConfigAction;
+import fr.space.Views.ViewActions.JFileChooserConfigAction;
+import fr.space.Views.ViewActions.SaveConfigAction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,28 +98,28 @@ public class ConfigView extends View {
 
 
         JLabel labelInterval = new JLabel("Intervalle de tir (en nanoseconde) :");
-        this.setTextFieldInterval(new JTextField());
+        this.setTextFieldInterval(new JTextField(String.valueOf(this.getController().getShootInterval())));
 
         top.add(labelInterval);
         top.add(this.getTextFieldInterval());
 
 
         JLabel labelNumberRowAliens = new JLabel("Nombre lignes d'aliens :");
-        this.setTextFieldRow(new JTextField());
+        this.setTextFieldRow(new JTextField(String.valueOf(this.getController().getAliensRow())));
 
         top.add(labelNumberRowAliens);
         top.add(this.getTextFieldRow());
 
 
         JLabel labelNumberColAliens = new JLabel("Nombre colonnes d'aliens :");
-        this.setTextFieldCol(new JTextField());
+        this.setTextFieldCol(new JTextField(String.valueOf(this.getController().getAliensCol())));
 
         top.add(labelNumberColAliens);
         top.add(this.getTextFieldCol());
 
 
         JLabel labelSpeed = new JLabel("Vitesse des Aliens :");
-        this.setTextFieldSpeed(new JTextField());
+        this.setTextFieldSpeed(new JTextField(String.valueOf(this.getController().getAliensSpeed())));
 
         top.add(labelSpeed);
         top.add(this.getTextFieldSpeed());

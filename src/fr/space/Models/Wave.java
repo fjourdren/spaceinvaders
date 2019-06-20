@@ -1,12 +1,10 @@
-package fr.space.Classes;
-
-import fr.space.Models.GameModel;
+package fr.space.Models;
 
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Wave {
+public class Wave extends Model {
 
     private GameModel gameModel;
     private Alien alien;

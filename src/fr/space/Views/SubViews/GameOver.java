@@ -1,4 +1,6 @@
-package fr.space.Views;
+package fr.space.Views.SubViews;
+
+import fr.space.Views.BoardPanel;
 
 import javax.swing.*;
 import java.awt.*;

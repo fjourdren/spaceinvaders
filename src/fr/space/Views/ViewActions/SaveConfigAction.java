@@ -1,7 +1,7 @@
-package fr.space.Views.viewActions;
+package fr.space.Views.ViewActions;
 
 import fr.space.Utils.RessourceLoader;
-import fr.space.Classes.Sprite;
+import fr.space.Models.Sprite;
 import fr.space.Views.ConfigView;
 
 import java.awt.event.ActionEvent;

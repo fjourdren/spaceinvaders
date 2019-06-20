@@ -1,6 +1,6 @@
 package fr.space.Models;
 
-import fr.space.Classes.*;
+import fr.space.Utils.GameState;
 import fr.space.Views.BoardPanel;
 
 import java.util.ArrayList;
