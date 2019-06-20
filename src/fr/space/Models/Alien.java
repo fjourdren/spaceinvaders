@@ -5,6 +5,10 @@ public class Alien extends Entity {
     private static float speed = 1.0f;
     private int score = 1;
 
+
+    /*
+     * Constructors
+     * */
     public Alien(Alien alien) {
         super(alien.getPosition(), alien.getLife(), alien.getSprite());
         
@@ -16,12 +20,19 @@ public class Alien extends Entity {
     }
 
 
+
+    /*
+     * Methods
+     * */
     public void update(double delta) {
 
     }
 
 
 
+    /*
+     * GETTER & SETTER
+     * */
     public int getScore() {
         return score;
     }

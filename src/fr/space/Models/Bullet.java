@@ -1,15 +1,25 @@
 package fr.space.Models;
 
 public class Bullet extends Entity {
+
     private GameModel gameModel;
 
-    public Bullet(GameModel gameModel, Position position, int life, Sprite sprite) {
+
+    /*
+     * Constructors
+     * */
+    public Bullet(GameModel gameModel, Position position, int life, Sprite sprite, Entity parent) {
         super(position, life, sprite);
 
         this.setGameModel(gameModel);
+        this.setParent(parent);
     }
 
 
+
+    /*
+     * Methods
+     * */
     public void update(double delta) {
         this.move(delta, 0, -1);
 
@@ -20,6 +30,10 @@ public class Bullet extends Entity {
     }
 
 
+
+    /*
+     * GETTER & SETTER
+     * */
     public GameModel getGameModel() {
         return gameModel;
     }

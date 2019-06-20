@@ -27,6 +27,9 @@ public class ConfigView extends View {
     private JTextField textFieldSpeed;
 
 
+    /*
+     * Constructors
+     * */
     public ConfigView(ControllerGame controller, String title, int width, int height) {
         super(controller, title, width, height);
 
@@ -36,6 +39,10 @@ public class ConfigView extends View {
     }
 
 
+
+    /*
+     * Methods
+     * */
     public void buildWindow() {
         // === building ===
         JPanel panelStructure = new JPanel();
@@ -43,7 +50,9 @@ public class ConfigView extends View {
         panelStructure.setLayout(new BorderLayout());
 
 
-        // generate top
+        /*
+         generate top JPanel
+          */
         JPanel top = new JPanel();
 
         top.setLayout(new GridLayout(9,2));
@@ -51,7 +60,7 @@ public class ConfigView extends View {
 
 
 
-        // generate swing elements
+        // bullet sprite label et bouton parcourir
         JLabel labelSpriteBullet = new JLabel("Sprite Bullet :");
         JButton buttonParcourirBullet = new JButton("Parcourir...");
 
@@ -61,6 +70,7 @@ public class ConfigView extends View {
         top.add(buttonParcourirBullet);
 
 
+        // Alien sprite label et bouton parcourir
         JLabel labelSpriteAlien = new JLabel("Sprite Alien :");
         JButton buttonParcourirALien = new JButton("Parcourir...");
 
@@ -70,6 +80,7 @@ public class ConfigView extends View {
         top.add(buttonParcourirALien);
 
 
+        // Spaceship sprite label et bouton parcourir
         JLabel labelSpriteSpaceShip = new JLabel("Sprite SpaceShip :");
         JButton buttonParcourirSpaceShip = new JButton("Parcourir...");
 
@@ -79,6 +90,7 @@ public class ConfigView extends View {
         top.add(buttonParcourirSpaceShip);
 
 
+        // explosion sprite label et bouton parcourir
         JLabel labelSpriteExplosion = new JLabel("Sprite Explosion :");
         JButton buttonParcourirExplosion = new JButton("Parcourir...");
 
@@ -88,6 +100,7 @@ public class ConfigView extends View {
         top.add(buttonParcourirExplosion);
 
 
+        // background label et bouton parcourir
         JLabel labelBackground = new JLabel("Arrière plan :");
         JButton buttonParcourirBackground = new JButton("Parcourir...");
 
@@ -97,6 +110,7 @@ public class ConfigView extends View {
         top.add(buttonParcourirBackground);
 
 
+        // interval shoot label et textfield
         JLabel labelInterval = new JLabel("Intervalle de tir (en nanoseconde) :");
         this.setTextFieldInterval(new JTextField(String.valueOf(this.getController().getShootInterval())));
 
@@ -104,6 +118,7 @@ public class ConfigView extends View {
         top.add(this.getTextFieldInterval());
 
 
+        // nb ligne label et textfield
         JLabel labelNumberRowAliens = new JLabel("Nombre lignes d'aliens :");
         this.setTextFieldRow(new JTextField(String.valueOf(this.getController().getAliensRow())));
 
@@ -111,6 +126,7 @@ public class ConfigView extends View {
         top.add(this.getTextFieldRow());
 
 
+        // nb colonnes label et textfield
         JLabel labelNumberColAliens = new JLabel("Nombre colonnes d'aliens :");
         this.setTextFieldCol(new JTextField(String.valueOf(this.getController().getAliensCol())));
 
@@ -118,6 +134,7 @@ public class ConfigView extends View {
         top.add(this.getTextFieldCol());
 
 
+        // speed aliens et textfield
         JLabel labelSpeed = new JLabel("Vitesse des Aliens :");
         this.setTextFieldSpeed(new JTextField(String.valueOf(this.getController().getAliensSpeed())));
 
@@ -126,9 +143,9 @@ public class ConfigView extends View {
 
 
 
-
-
-        // generate bot
+        /*
+        mise en place de la partie inférieur (bouton sauvegarde)
+         */
         JPanel bot = new JPanel();
 
         JButton saveButton = new JButton("Sauvegarder");
@@ -136,45 +153,26 @@ public class ConfigView extends View {
         bot.add(saveButton);
 
 
+        // ajout des éléments dans le JPanel principal
         panelStructure.add(top, BorderLayout.CENTER);
         panelStructure.add(bot, BorderLayout.SOUTH);
 
 
-
-
-
-        /*panelStructure.setLayout(new GridLayout(2,1));
-
-
-        JPanel panelConfig = new JPanel();
-        panelConfig.add(new JLabel("test"));
-
-
-
-        panelConfig.add(jLabelOriginePres);
-
-
-        panelStructure.add(panelConfig);
-
-        //save button
-        JButton saveButton = new JButton("Sauvegarder");
-        saveButton.setPreferredSize(new Dimension(100,100));
-        panelStructure.add(saveButton);*/
-
-
+        // ajout du jpanel à la fenêtre
         this.add(panelStructure);
-
-
 
         this.setVisible(true);
     }
-
 
     public void update(Observable observable, Object o) {
 
     }
 
 
+
+    /*
+     * GETTER & SETTER
+     * */
     public String getBulletSpritePath() {
         return bulletSpritePath;
     }

@@ -4,18 +4,23 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity extends Model {
+
     private Position position;
     private int life;
     private float speed = 2.0f;
     private Sprite sprite;
+    private boolean hitbox = true;
+    private Entity parent;
 
 
+    /*
+     * Constructors
+     * */
     public Entity(Position position, int life, Sprite sprite) {
         this.setPosition(position);
         this.setLife(life);
         this.setSprite(sprite);
     }
-
 
     public Entity(Position position, int life, BufferedImage spriteImage) {
         this.setPosition(position);
@@ -23,14 +28,21 @@ public abstract class Entity extends Model {
         this.setSprite(new Sprite(spriteImage));
     }
 
-
     public Entity(Position position, int life) {
         this.setPosition(position);
         this.setLife(life);
     }
 
 
+
+    /*
+     * Methods
+     * */
     public boolean collisionWith(Entity e) {
+        if(e == this || e.getParent() == this || this.getParent() == e) {
+            return false;
+        }
+
         int minxImageA = this.getPosition().getX();
         int maxxImageA = this.getPosition().getX() + this.getSprite().getxDimension();
 
@@ -72,7 +84,6 @@ public abstract class Entity extends Model {
         this.setPosition(new Position(newX, newY));
     }
 
-
     public void destroy() {
         this.setLife(0);
     }
@@ -86,6 +97,10 @@ public abstract class Entity extends Model {
     }
 
 
+
+    /*
+     * GETTER & SETTER
+     * */
     public Position getPosition() {
         return position;
     }
@@ -121,5 +136,21 @@ public abstract class Entity extends Model {
 
     public void setSpeed(float speed) {
         this.speed = speed;
+    }
+
+    public Entity getParent() {
+        return parent;
+    }
+
+    public void setParent(Entity parent) {
+        this.parent = parent;
+    }
+
+    public boolean isHitbox() {
+        return hitbox;
+    }
+
+    public void setHitbox(boolean hitbox) {
+        this.hitbox = hitbox;
     }
 }

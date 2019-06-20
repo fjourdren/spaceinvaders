@@ -5,6 +5,7 @@ import fr.space.Utils.RessourceLoader;
 import java.awt.image.BufferedImage;
 
 public class Sprite extends Model {
+
     private static Sprite spriteBullet = new Sprite(RessourceLoader.loadBufferedImageFromRessources("shot.png"));
     private static Sprite spriteAlien = new Sprite(RessourceLoader.loadBufferedImageFromRessources("alien.png"));
     private static Sprite spriteShip = new Sprite(RessourceLoader.loadBufferedImageFromRessources("ship.png"));
@@ -13,22 +14,42 @@ public class Sprite extends Model {
 
     private static Sprite background = new Sprite(RessourceLoader.loadBufferedImageFromRessources("background.jpg"));
 
-
     private BufferedImage image;
     private int xDimension, yDimension;
 
 
+    /*
+     * Constructors
+     * */
     public Sprite(BufferedImage image) {
         this.setImage(image);
     }
 
 
+
+    /*
+     * Methods
+     * */
     public void calculateSize() {
         this.setxDimension(this.getImage().getWidth());
         this.setyDimension(this.getImage()   .getHeight());
     }
 
 
+
+    /*
+     * GETTER & SETTER with calcul
+     * */
+    public void setImage(BufferedImage image) {
+        this.image = image;
+        this.calculateSize();
+    }
+
+
+
+    /*
+     * GETTER & SETTER
+     * */
     public static Sprite getSpriteBullet() {
         return spriteBullet;
     }
@@ -71,11 +92,6 @@ public class Sprite extends Model {
 
     public BufferedImage getImage() {
         return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
-        this.calculateSize();
     }
 
     public int getxDimension() {

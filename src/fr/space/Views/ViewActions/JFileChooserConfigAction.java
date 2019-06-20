@@ -14,23 +14,35 @@ public class JFileChooserConfigAction implements ActionListener {
     private ConfigView parent;
     private String toSet;
 
+
+    /*
+     * Constructors
+     * */
     public JFileChooserConfigAction(ConfigView parent, String toSet) {
         this.setParent(parent);
         this.setToSet(toSet);
     }
 
 
+
+    /*
+     * Methods
+     * */
     public void actionPerformed(ActionEvent e) {
         JFileChooser jf = new JFileChooser();
-        FileNameExtensionFilter extensionsFilter = new FileNameExtensionFilter("JPG, PNG & GIF Images", "jpg", "gif", "png");
+        FileNameExtensionFilter extensionsFilter = new FileNameExtensionFilter("JPG, PNG & GIF Images", "jpg", "gif", "png"); // extensions autorisés pour les sprites
 
+        // on applique le filtre d'extension et on demande que des fichiers
         jf.setFileFilter(extensionsFilter);
         jf.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
+        // on ouvre la fenêtre de parcours des fichiers et on attend une valeur
         if(jf.showOpenDialog((Component) e.getSource()) == JFileChooser.APPROVE_OPTION) {
             //File dir = jf.getCurrentDirectory();
             File file = jf.getSelectedFile();
 
+
+            // en fonction de l'action configurer on va modifier le bon sprite
             switch(this.getToSet()) {
                 case "bullet":
                     this.getParent().setBulletSpritePath(file.getPath());
@@ -52,6 +64,10 @@ public class JFileChooserConfigAction implements ActionListener {
     }
 
 
+
+    /*
+     * GETTER & SETTER
+     * */
     public ConfigView getParent() {
         return parent;
     }
