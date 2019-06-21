@@ -20,13 +20,16 @@ public class Keyboard implements KeyListener {
     /*
      * Methods
      * */
+    // event qui récupère quand une touche est appuyé
     public void keyTyped(KeyEvent e) {
     }
 
+    // event qui va nous mettre la valeur de la touche appuyé à vrai dans un tableau
     public void keyPressed(KeyEvent e) {
         this.keys[e.getKeyCode()] = true;
     }
 
+    // event qui va nous mettre la valeur de la touche laché à faux dans un tableau
     public void keyReleased(KeyEvent e) {
         this.keys[e.getKeyCode()] = false;
     }

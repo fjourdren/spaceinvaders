@@ -27,9 +27,11 @@ public class Spaceship extends Entity {
         
     }
 
+    // fait tirer le joueur
     public void shoot() {
         long now = System.nanoTime();
 
+        // vérification que l'interval de tire est bien respecté
         if (now - this.getLastShootTime() > Spaceship.getShootInterval()) {
 
             Position bulletPosition = new Position((this.getPosition().getX() + (this.getSprite().getxDimension() / 2)) - Sprite.getSpriteBullet().getxDimension() / 2, this.getPosition().getY());
@@ -41,6 +43,7 @@ public class Spaceship extends Entity {
         }
     }
 
+    // réécriture de move venu d'entité pour vérifier que l'utilisateur reste dans la zone de jeu
     public void move(double delta, double xAbsice, double yAbsice) {
         int newX = (int) (this.getPosition().getX() + xAbsice * this.getSpeed() * delta);
 

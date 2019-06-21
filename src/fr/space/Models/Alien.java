@@ -3,7 +3,7 @@ package fr.space.Models;
 public class Alien extends Entity {
 
     private static float speed = 1.0f;
-    private int score = 1;
+    private int score = 1; // score que vaut l'alien à sa mort
 
 
     /*
