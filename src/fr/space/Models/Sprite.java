@@ -30,9 +30,10 @@ public class Sprite extends Model {
     /*
      * Methods
      * */
+    // calcul de la largeur et de la hauteur du sprite
     public void calculateSize() {
         this.setxDimension(this.getImage().getWidth());
-        this.setyDimension(this.getImage()   .getHeight());
+        this.setyDimension(this.getImage().getHeight());
     }
 
 
@@ -40,6 +41,7 @@ public class Sprite extends Model {
     /*
      * GETTER & SETTER with calcul
      * */
+    // on force à récupérer la largeur et la hauteur de l'image dans le sprite
     public void setImage(BufferedImage image) {
         this.image = image;
         this.calculateSize();

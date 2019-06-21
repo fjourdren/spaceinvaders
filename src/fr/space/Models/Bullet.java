@@ -21,8 +21,10 @@ public class Bullet extends Entity {
      * Methods
      * */
     public void update(double delta) {
+        // déplacement du bullet en permanence vers le haut
         this.move(delta, 0, -1);
 
+        // si la bullet est sortie de l'écran, on la supprime
         int pixelLimitToDestroyObject =  0 - this.getSprite().getyDimension();
         if(this.getPosition().getY() < pixelLimitToDestroyObject) {
             this.destroy();

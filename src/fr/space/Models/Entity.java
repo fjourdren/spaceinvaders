@@ -38,7 +38,9 @@ public abstract class Entity extends Model {
     /*
      * Methods
      * */
+    // détection des collision avec une autre entité
     public boolean collisionWith(Entity e) {
+        // vérifie que les deux entités doivent avoir des collisions entre elles
         if(e == this || e.getParent() == this || this.getParent() == e) {
             return false;
         }
@@ -70,6 +72,7 @@ public abstract class Entity extends Model {
 
     }
 
+    // déplacement d'une entité dans l'espace
     public void move(double delta, double xAbsice, double yAbsice) {
         int deltaInt = (int) delta;
 
@@ -77,6 +80,7 @@ public abstract class Entity extends Model {
             deltaInt = 1;
         }
 
+        // calcul de la nouvelle position avec le vecteur de déplacement, la vitesse et le delta du jeu
         int newX = (int) (this.getPosition().getX() + xAbsice * this.getSpeed() * deltaInt);
         int newY = (int) (this.getPosition().getY() + yAbsice * this.getSpeed() * deltaInt);
 

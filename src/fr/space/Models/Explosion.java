@@ -13,7 +13,7 @@ public class Explosion extends Entity {
         super(pos, 1, Sprite.getSpriteExplosion());
 
         this.setSpawnTime(System.nanoTime());
-        this.setHitbox(false);
+        this.setHitbox(false); // les explosions n'ont pas d'hitbox
     }
 
 
@@ -24,6 +24,7 @@ public class Explosion extends Entity {
     public void update(double delta) {
         long now = System.nanoTime();
 
+        // si l'explosion a dépacé sont temps de vie, on le tue
         if(now > this.getSpawnTime() + Explosion.getTimeToLive()) {
             this.setLife(0);
         }

@@ -32,6 +32,7 @@ public class Wave extends Model {
         this.setDirectionY(0);
     }
 
+    // copie d'une autre wave pour avoir une nouvelle signature mémoire
     public Wave(Wave wave) {
         this.setGameModel(wave.getGameModel());
 
@@ -51,10 +52,12 @@ public class Wave extends Model {
     /*
      * Methods
      * */
+    // spawn des aliens avec x lignes et y colonnes
     public void spawn() {
 
         for(int i = 0; i < this.getCol(); i++) {
             for(int j = 0; j < this.getRow(); j++) {
+                // calcul de la position de l'alien à ajouter
                 Position pos = new Position(i * (Sprite.getSpriteAlien().getxDimension() + this.getMargeBeetweenAliens()), j * (Sprite.getSpriteAlien().getyDimension() + this.getMargeBeetweenAliens()));
 
                 Alien tmpAlien = new Alien(this.getAlien());
@@ -65,6 +68,7 @@ public class Wave extends Model {
         }
     }
 
+    // récupère l'alien avec la plus faible valeur X en position
     public int minXAlien() {
         int output = 999999;
 
@@ -77,6 +81,7 @@ public class Wave extends Model {
         return output;
     }
 
+    // récupère l'alien avec la plus grande valeur X en position
     public int maxXAlien() {
         int output = -999999;
 
@@ -89,16 +94,19 @@ public class Wave extends Model {
         return output;
     }
 
+    // lance l'update de tous les aliens de la wave et choisi la direction de la wave
     public void update(double delta) {
 
         this.setDirectionY(0);
 
+        // détermine si la wave est arrivé en bout d'écran, si c'est le cas: changement de sens et déscente
         if(minXAlien() < 0 || maxXAlien() > this.getGameModel().getxSize()) {
             this.setDirectionX(-this.getDirectionX());
             this.setDirectionY(5);
         }
 
 
+        // lancement de l'update de tous les aliens de la wave
         Iterator<Alien> iterAliens = this.getAliens().iterator();
         while(iterAliens.hasNext()) {
             Alien a = iterAliens.next();
@@ -107,6 +115,7 @@ public class Wave extends Model {
 
             a.move(delta, this.getDirectionX(), this.getDirectionY());
 
+            // si l'alien est mort, alors on spawn une explosion
             if(a.getLife() <= 0) {
                 Explosion explo = new Explosion(a.getPosition());
                 this.getGameModel().addExplosion(explo);
@@ -118,17 +127,20 @@ public class Wave extends Model {
         }
     }
 
+    // modification de la vitesse de tous les aliens
     public void setSpeedToAllAliens(float newSpeed) {
         for (Alien a: this.getAliens()) {
             a.setSpeed(newSpeed);
         }
     }
 
+    // ajout d'un ennemi de la wave
     public void addAlien(Alien alien) {
         this.getAliens().add(alien);
         this.getGameModel().setNbAlien(this.getAliens().size());
     }
 
+    // suppression d'un ennemi de la wave
     public void removeAlien(Alien alien) {
         this.getAliens().remove(alien);
         this.getGameModel().setNbAlien(this.getAliens().size());
