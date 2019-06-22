@@ -3,3 +3,4 @@ projet-spaceinvaders.iml
 bin
 **/out
 *.class
+fileToBuild.list
