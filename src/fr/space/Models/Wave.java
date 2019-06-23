@@ -119,6 +119,7 @@ public class Wave extends Model {
             if(a.getLife() <= 0) {
                 Explosion explo = new Explosion(a.getPosition());
                 this.getGameModel().addExplosion(explo);
+                this.getGameModel().addScore(a.getScore());
 
                 iterAliens.remove();
 
