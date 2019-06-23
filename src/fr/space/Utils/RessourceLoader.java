@@ -17,10 +17,6 @@ public class RessourceLoader {
 
         // on essaye de load l'image
         try {
-            if (RessourceLoader.class.getClassLoader().getResource(pathImage) == null) { // vérifie si l'image existe
-                throw new RuntimeException("Can't find resource: " + pathImage);
-            }
-
             image = ImageIO.read(RessourceLoader.class.getResource(pathImage));
 
 
